@@ -30,14 +30,15 @@
         lis.forEach(item => lisContents.push(item.textContent));
         for (let i = 0; i < lis.length; i++) {
             lis[i].addEventListener("mouseenter", (e) => {
-                lis.forEach(item => {
-                    item.style.color = "";
-                    item.style.fontSize = "";
+                lis.forEach((item, index) => {
+                    if (i == index) {
+                        e.target.style.color = "red";
+                        e.target.style.fontSize = "22px";
+                    } else {
+                        item.style.color = "";
+                        item.style.fontSize = "";
+                    }
                 })
-                if (lisContents[i] == e.target.textContent) {
-                    e.target.style.color = "red";
-                    e.target.style.fontSize = "22px";
-                }
             }, false);
         }
     </script>
