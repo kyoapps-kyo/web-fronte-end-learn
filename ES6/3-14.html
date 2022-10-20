@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 300px;
+            margin: 20px 0;
+            line-height: 30px;
+            background: yellowgreen;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="start">开始</button>
+    <button id="stop">停止</button>
+    <div id="box"></div>
+    <script>
+        const startBtn = document.getElementById('start')
+        const stopBtn = document.getElementById('stop')
+        const box = document.getElementById('box')
+        var show = {
+            content: "Hello World",
+            timer: null,
+            start: function () {
+                // 在此补充代码
+                startBtn.onclick = () => {
+                    clearInterval(this.timer);
+                    this.timer = setInterval(() => {
+                        box.textContent += this.content + " ";
+                    }, 1000);
+                }
+            },
+            stop: function () {
+                // 在此补充代码
+                stopBtn.onclick = () => {
+                    clearInterval(this.timer);
+                }
+            },
+        }
+        // 在此补充代码
+        show.start();
+        show.stop();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装一个创建dom元素的方法</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script>
+        const customCreateElement = (tagName = "div", { className = "tag", content = "default" } = {}) => {
+            const tag = document.createElement(tagName);
+            tag.className = className;
+            tag.textContent = content;
+            return tag;
+        }
+
+        const el = customCreateElement("p", {
+            className: "text",
+            content: "摸鱼仔正是在下"
+        })
+
+        const app = document.querySelector("#app");
+        app.appendChild(el);
+    </script>
+</body>
+
+</html>

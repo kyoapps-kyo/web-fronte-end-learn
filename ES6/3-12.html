@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">Start</button>
+    <h2 id="info"></h2>
+    <script>
+        const btn = document.querySelector("#btn");
+        const info = document.querySelector("#info");
+        console.log(btn, info);
+        const timer = {
+            time: 0,
+            start: function () {
+                let timer;
+                btn.onclick = () => {
+                    clearInterval(timer);
+                    timer = setInterval(() => {
+                        this.time++;
+                        info.textContent = this.time;
+                        if (this.time > 5) {
+                            this.time = 0;
+                            clearInterval(timer);
+                        }
+                    }, 1000);
+                }
+            }
+        }
+        info.textContent = timer.time;
+        timer.start();
+    </script>
+</body>
+
+</html>
