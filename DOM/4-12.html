@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>onchange()</title>
+    <style type="text/css">
+        #div {
+            width: 300px;
+            height: 300px;
+            border: 2px solid gray;
+            margin: 100px 0 0 200px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            const oSelect = document.querySelector("#color");
+            const oDiv = document.querySelector("#div");
+            const oDivText = oDiv.innerText;
+            oSelect.onchange = function () {
+                switch (oSelect.value) {
+                    case "0": oDiv.style.backgroundColor = null;
+                        oDiv.innerText = oDivText;
+                        break;
+                    case "yellow": oDiv.style.backgroundColor = "yellow";
+                        oDiv.innerText = "我的背景变成了" + oSelect.value;
+                        break;
+                    case "orange": oDiv.style.backgroundColor = "orange";
+                        oDiv.innerText = "我的背景变成了" + oSelect.value;
+                        break;
+                    case "pink": oDiv.style.backgroundColor = "pink";
+                        oDiv.innerText = "我的背景变成了" + oSelect.value;
+                        break;
+                    case "purple": oDiv.style.backgroundColor = "purple";
+                        oDiv.innerText = "我的背景变成了" + oSelect.value;
+                        break;
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div>
+        <span>请选择您喜欢的颜色:</span>
+        <select id="color">
+            <option value="0">请选择</option>
+            <option value="yellow">黄色</option>
+            <option value="orange">橘色</option>
+            <option value="pink">粉色</option>
+            <option value="purple">紫色</option>
+        </select>
+    </div>
+    <div id="div">我是div</div>
+</body>
+
+</html>

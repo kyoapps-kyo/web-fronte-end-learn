@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e.stopPropagation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #modal {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.057);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #modal h1 {
+            width: 300px;
+            height: 200px;
+            line-height: 200px;
+            background-color: rgb(66, 45, 121);
+            text-align: center;
+            color: aliceblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="modal">
+        <h1>这是modal</h1>
+    </div>
+    <div id="box"><button id="btn">点我</button></div>
+    <script>
+        const oBox = document.querySelector("#box")
+        const oBtn = document.querySelector("#btn")
+        const oModal = document.querySelector("#modal")
+        oBox.onclick = function () {
+            console.log("I'm box")
+        }
+        oBtn.onclick = function (e) {
+            e.stopPropagation();
+            oModal.style.display = "flex"
+        }
+        document.onclick = function () {
+            oModal.style.display = "none"
+        }
+    </script>
+</body>
+
+</html>

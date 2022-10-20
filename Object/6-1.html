@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>红绿灯切换问题</title>
+    <style>
+        #box img {
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+
+    <script>
+        function TrafficLight() {
+            this.color = 1;
+            this.init();
+            this.bindEvents();
+        }
+
+        TrafficLight.prototype.init = function () {
+            this.dom = document.createElement("img");
+            this.dom.src = `images/${this.color}.jpg`;
+            box.appendChild(this.dom);
+        }
+        TrafficLight.prototype.bindEvents = function () {
+            //备份上下文
+            const self = this;
+            //dom元素中的this指向dom实例本身，不能指向对象，所以要改动对象中的属性，需要使用备份的self
+            this.dom.onclick = function () {
+                self.changeColor();
+            }
+        }
+        TrafficLight.prototype.changeColor = function () {
+            this.color++;
+            if (this.color == 4)
+                this.color = 1;
+            this.dom.src = `images/${this.color}.jpg`;
+        }
+
+        const box = document.getElementById("box");
+        let count = 100;
+        while (count--) {
+            new TrafficLight();
+        }
+    </script>
+
+</body>
+
+</html>

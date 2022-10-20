@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>批量添加事件监听</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <p>页面上有一个无序列表ul，它内部共有20个li元素，请批量给他们添加点击事件监听，实现效果：点击哪个li元素，哪个li元素就变红</p>
+    <ul id="list"></ul>
+    <script>
+        const oList = document.getElementById("list")
+        console.log(oList)
+        const rows = 20;
+        for (let i = 0; i < rows; i++) {
+            const oLi = document.createElement("li")
+            oLi.textContent = i + 1
+            oList.appendChild(oLi)
+        }
+        oList.onclick = function (e) {
+            this.childNodes.forEach(item => item.style.color = null)
+            e.target.style.color = "red"
+        }
+        oList.onmouseover = function (e) {
+            this.childNodes.forEach(item => item.style.color = null)
+            e.target.style.color = "red"
+        }
+    </script>
+</body>
+
+</html>

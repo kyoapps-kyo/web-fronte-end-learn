@@ -1,0 +1,108 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.about {
+    width: 1200px;
+    height: 750px;
+    padding-top: 30px;
+    margin: 0 auto;
+}
+
+.about h1 {
+    font-size: 32px;
+    text-align: center;
+}
+
+.about .col-line {
+    width: 60px;
+    height: 3px;
+    background-color: #07cbc9;
+    margin: 10px auto;
+}
+
+.about .about-descript {
+    width: 430px;
+    color: gray;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about .about-content {
+    width: 1200px;
+    height: 464px;
+    padding-top: 30px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.about .about-content .float-box {
+    overflow: hidden;
+}
+
+.about .about-content .l1 {
+    float: left;
+    margin-right: 140px;
+    padding-top: 10px;
+}
+
+.about .about-content .l2 {
+    float: left;
+    width: 659px;
+    height: 435px;
+}
+
+.about .about-content .r1 {
+    float: right;
+}
+
+.about .about-content .r1 .c {
+    width: 260px;
+    border: 1px solid rgb(67, 255, 236);
+    margin-bottom: 30px;
+    padding: 40px 0;
+}
+
+.about .about-content .r1 .c:last-child {
+    margin-bottom: 0px;
+}
+
+.about .about-content .r1 .c p {
+    text-align: center;
+}
+
+.about .about-content .r1 .c .c-t {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.about .about-content .absolute-content {
+    position: absolute;
+    top: 27%;
+    width: 300px;
+    left: 0;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid gray;
+}
+
+.about .about-content .absolute-content p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.about .about-content .absolute-content a {
+    display: block;
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    background-color: #000;
+    line-height: 40px;
+    color: #fff;
+}

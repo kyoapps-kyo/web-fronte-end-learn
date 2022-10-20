@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM特效一 放回顶部</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-part {
+            width: 500px;
+            margin: 0 auto;
+            background-color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .floor-nav {
+            position: fixed;
+            top: 50%;
+            right: 40px;
+            translate: 0 -50%;
+            background-color: rgb(255, 152, 61);
+            width: 80px;
+        }
+
+        .floor-nav ul {
+            list-style: none;
+        }
+
+        .floor-nav ul li {
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .floor-nav ul li.current {
+            background-color: purple;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="floor-nav">
+        <ul id="list">
+            <li class="current" data-n="体育">体育</li>
+            <li class="" data-n="科技">科技</li>
+            <li class="" data-n="游戏">游戏</li>
+            <li class="" data-n="鱼类">鱼类</li>
+            <li class="" data-n="视频">视频</li>
+        </ul>
+    </nav>
+    <section class="content-part" style="height:500px;" data-n="体育">
+        体育栏目
+    </section>
+    <section class="content-part" style="height:600px;" data-n="科技">
+        科技栏目
+    </section>
+    <section class="content-part" style="height:480px;" data-n="游戏">
+        游戏栏目
+    </section>
+    <section class="content-part" style="height:480px;" data-n="鱼类">
+        鱼类栏目
+    </section>
+    <section class="content-part" style="height:480px;" data-n="视频">
+        视频栏目
+    </section>
+    <script>
+        const list = document.querySelector("#list");
+        const lis = document.querySelectorAll("#list li");
+        const contents = document.querySelectorAll(".content-part");
+        const root = document.documentElement || document.body;
+        let nowFloor = -1;
+        const offsetTopArray = [];
+        //事件委托，点击li元素，移动到对应的section元素上
+        list.onclick = function (e) {
+            if (e.target.tagName.toLowerCase() == "li") {
+                let n = e.target.getAttribute("data-n");
+                let target = document.querySelector(`.content-part[data-n=${n}]`)
+                root.scrollTop = target.offsetTop;
+            }
+        }
+        //将每个section的offsetTop压入数组，之后只需要比较滑动值在不在idx和idx+1之间，数组比section多一位，多的一位设置为Infinity
+        contents.forEach(item => {
+            offsetTopArray.push(item.offsetTop);
+        })
+        offsetTopArray.push(Infinity);
+        //进行滑动监听，滑动到idx和idx+1之间时，将li的class设置为current
+        window.onscroll = function () {
+            let i = 0;//i作为节流器使用
+            offsetTopArray.forEach((item, index) => {
+                if (root.scrollTop >= item) {
+                    i = index;
+                    return;
+                }
+            })
+            /*
+                for (i = 0; i < arr.length; i++) {
+                if (scrollTop >= arr[i] && scrollTop < arr[i + 1])
+                    break;
+            }
+            */
+            //节流
+            if (nowFloor != i) {
+                nowFloor = i;
+                //当前section对应的li设置为current，其他不需要current
+                lis.forEach((item, index) => {
+                    if (index == nowFloor) {
+                        item.classList.add("current");
+                    } else {
+                        item.classList.remove("current");
+                    }
+                })
+            }
+        }
+    </script>
+</body>
+
+</html>

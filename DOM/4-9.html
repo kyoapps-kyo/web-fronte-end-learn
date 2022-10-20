@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习4-9</title>
+    <script>
+        window.onload = function () {
+            const btn = document.getElementsByTagName("input")[0];
+            btn.onclick = function () {
+                btn.style.color = "red"
+            }
+            btn.onmouseout = function () {
+                btn.style.color = ""
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="button" value="点击改变按钮字体颜色">
+</body>
+
+</html>

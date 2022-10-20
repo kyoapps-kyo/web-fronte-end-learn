@@ -1,0 +1,248 @@
+.site-header .header-top {
+    height: 40px;
+    background-color: #0058AA;
+    min-width: 1201px;
+}
+
+.site-header .header-top p {
+    float: right;
+    height: 40px;
+    width: 238px;
+    line-height: 40px;
+    color: #fff;
+    font-size: 18px;
+}
+
+.site-header .header-con {
+    height: 121px;
+    padding-top: 19px;
+    padding-bottom: 11px;
+}
+
+.site-header .header-con h1 {
+    float: left;
+    color: #0058AA;
+    font-size: 64px;
+    width: 192px;
+    height: 91px;
+    margin-right: 109px;
+}
+
+.site-header .header-con .header-nav {
+    height: 91px;
+    width: 560px;
+    margin-right: 61px;
+    float: left;
+}
+
+.site-header .header-con .header-nav>ul>li {
+    height: 91px;
+    width: 64px;
+    margin-right: 60px;
+    float: left;
+}
+
+.site-header .header-con .header-nav>ul>li a {
+    display: block;
+    height: 91px;
+    width: 64px;
+}
+
+.site-header .header-con .header-nav>ul>li:last-child {
+    margin-right: 0;
+}
+
+.site-header .header-con .header-nav>ul>li i {
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin-left: 7px;
+    margin-bottom: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.site-header .header-con .header-nav>ul>li:hover i,
+.site-header .header-con .header-nav>ul>li.current i {
+    background-color: #0058aa;
+    border-radius: 50%;
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(1) i {
+    background-image: url(../images/home-gry.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(2) i {
+    background-image: url(../images/abouts-gry.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(3) i {
+    background-image: url(../images/kefu-gry.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(4) i {
+    background-image: url(../images/chanpin-gry.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(5) i {
+    background-image: url(../images/fuwu-gry.png);
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(1):hover i,
+.site-header .header-con .header-nav>ul>li:nth-child(1).current i {
+    background-image: url(../images/home-white.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(2):hover i,
+.site-header .header-con .header-nav>ul>li:nth-child(2).current i {
+    background-image: url(../images/abouts-white.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(3):hover i,
+.site-header .header-con .header-nav>ul>li:nth-child(3).current i {
+    background-image: url(../images/kefu-white.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(4):hover i,
+.site-header .header-con .header-nav>ul>li:nth-child(4).current i {
+    background-image: url(../images/chanpin-white.png);
+
+}
+
+.site-header .header-con .header-nav>ul>li:nth-child(5):hover i,
+.site-header .header-con .header-nav>ul>li:nth-child(5).current i {
+    background-image: url(../images/fuwu-white.png);
+}
+
+.site-header .header-con .header-nav>ul>li span {
+    display: block;
+    width: 64px;
+    height: 21px;
+    text-align: center;
+    line-height: 21px;
+    color: #545454;
+    font-size: 16px;
+}
+
+.site-header .header-con .search-box {
+    width: 277px;
+    height: 39px;
+    float: right;
+    margin-top: 32px;
+}
+
+.site-header .header-con .search-box input {
+    outline: none;
+    border: 1px solid #d3d3d3;
+    background-color: none;
+    width: 212px;
+    height: 35px;
+    padding-left: 15px;
+}
+
+.site-header .header-con .search-box a {
+    display: block;
+    float: right;
+    width: 48px;
+    height: 39px;
+    background-color: #0058aa;
+    margin-top: -2px;
+}
+
+.site-header .header-con .search-box a>img {
+    width: 33px;
+    height: 33px;
+    position: relative;
+    top: 5px;
+    left: 8px;
+}
+
+.site-banner {
+    height: 650px;
+    width: 100%;
+    min-width: 1201px;
+    background: url(../images/banner01.png);
+    background-position: center;
+}
+
+.site-banner .bottom-box {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.site-banner .bottom-box .points {
+    position: absolute;
+    width: 42px;
+    height: 10px;
+    bottom: 50px;
+    left: 50%;
+    margin-left: -21px;
+}
+
+.site-banner .bottom-box .points li {
+    float: left;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    margin-left: 6px;
+    border-radius: 50%;
+}
+
+.site-banner .bottom-box .points li:first-child {
+    margin-left: 0;
+}
+
+.site-banner .bottom-box .points li.current {
+    background-color: #0058AA;
+}
+
+.site-pro {
+    background-color: rgba(167, 167, 167, 0.172);
+    padding: 38px 0 32px;
+    min-width: 1201px;
+    width: 100%;
+}
+
+.site-pro .pro-con {
+    height: 233px;
+    width: 1055px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.site-pro .pro-con>ul>li {
+    float: left;
+    height: 233px;
+    width: 171px;
+    margin-right: 50px;
+}
+
+.site-pro .pro-con>ul>li:last-child {
+    margin-right: 0;
+}
+
+.site-pro .pro-con>ul>li>a {
+    display: block;
+    height: 233px;
+    width: 171px;
+}
+
+.site-pro .pro-con>ul>li>a>img {
+    width: 171px;
+    height: 175px;
+    margin-bottom: 10px;
+}
+
+.site-pro .pro-con>ul>li>a>p {
+    color: #838383;
+    height: 48px;
+    width: 163px;
+}

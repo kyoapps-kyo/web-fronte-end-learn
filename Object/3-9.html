@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>上下文规则6</title>
+    <style>
+        div {
+            width: 200px;
+            height: 200px;
+            border: 1px solid #ccc;
+            margin: 20px;
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3"></div>
+    <script>
+        const div1 = document.getElementById("div1");
+        const div2 = document.getElementById("div2");
+        const div3 = document.getElementById("div3");
+        let flag = true;
+
+        const clickHandle = function () {
+            console.log(this);
+            let self = this;
+            setTimeout(function () {
+                self.style.backgroundColor = "red";
+            }, 2000)
+        }
+        div1.onclick = clickHandle;
+        div2.onclick = clickHandle;
+        div3.onclick = clickHandle;
+    </script>
+</body>
+
+</html>

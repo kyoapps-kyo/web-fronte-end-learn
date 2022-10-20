@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>onblur and onfocus</title>
+    <style type="text/css">
+        .red {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    姓名：<input type="text"> <span></span>
+    <script type="text/javascript">
+        const oSpan = document.querySelector("span");
+        const oInput = document.querySelector("input");
+        oInput.onfocus = function () {
+            oSpan.innerText = "请输入姓名"
+        }
+        oInput.onblur = function () {
+            oSpan.innerText = null;
+            if (!oInput.value) {
+                oInput.style.borderColor = "red";
+                oSpan.innerText = "用户名不能为空"
+            } else
+                oInput.style.borderColor = null;
+        }
+    </script>
+
+</body>
+
+</html>

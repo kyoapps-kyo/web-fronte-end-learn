@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOM特效一 放回顶部</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 5000px;
+            background-image: linear-gradient(to bottom, rgb(58, 179, 249), red, green, yellow);
+        }
+
+        .bottom-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            height: 20px;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            transition: opacity .5s ease;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bottom-btn" id="btn">回到顶部</div>
+    <script>
+        const root = document.documentElement;
+        const btn = document.querySelector("#btn");
+        const TIME = 10;
+        const HEIGHT = 2000;
+        let timer;
+        window.onscroll = function () {
+            if (root.scrollTop > 200)
+                btn.style.opacity = 1;
+            else
+                btn.style.opacity = 0;
+        }
+        btn.onclick = function () {
+            clearInterval(timer);
+            timer = setInterval(() => {
+                root.scrollTop -= 100;
+                if (root.scrollTop < 1)
+                    clearInterval(timer);
+            }, TIME);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跑马灯轮播图特效</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .carousel {
+            width: 650px;
+            height: 360px;
+            border: 1px solid #ccc;
+            margin: 100px auto;
+            position: relative;
+        }
+
+        .carousel ul {
+            width: 10000px;
+            position: relative;
+            transition: all 0.5s ease-in-out;
+            top: 0;
+            left: 0;
+        }
+
+        .carousel ul li {
+            float: left;
+            width: 650px;
+            height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn {
+            background: rgb(191, 200, 16);
+            outline: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            color: #fff;
+            font-size: 24px;
+            line-height: 50px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        #left {
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            left: 20px;
+        }
+
+        #right {
+            position: absolute;
+            top: 50%;
+            margin-top: -25px;
+            right: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="carousel">
+        <ul id="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+        </ul>
+        <button id="left" class="btn">&lt;</button>
+        <button id="right" class="btn">&gt;</button>
+    </div>
+    <script>
+        const oBox = document.querySelector('#box');
+        const oList = document.querySelector("#list");
+        const oLeft = document.querySelector("#left");
+        const oRight = document.querySelector("#right");
+        let left = 0, idx = 0;
+        let lock = true;
+        oLeft.onclick = moveLeft;
+        oRight.onclick = moveRight;
+        const cloneLi = list.firstElementChild.cloneNode(true);
+        oList.appendChild(cloneLi);
+        function moveRight() {
+            if (!lock) return;
+            lock = false;
+            idx++;
+            if (idx > 4) {
+                setTimeout(() => {
+                    oList.style.transition = "none"
+                    oList.style.left = 0;
+                    idx = 0;
+                }, 500)
+            }
+            setTimeout(() => {
+                lock = true;
+            }, 500)
+            oList.style.transition = "all 0.5s ease-in-out"
+            oList.style.left = -idx * 650 + "px";
+        }
+        function moveLeft() {
+            if (!lock) return;
+            lock = false;
+            if (idx == 0) {
+                oList.style.transition = "none";
+                oList.style.left = -5 * 650 + "px";
+                setTimeout(() => {
+                    list.style.transition = "left .5s ease 0s";
+                    idx = 4;
+                    list.style.left = -idx * 650 + "px";
+                }, 0);
+            } else {
+                idx--;
+                list.style.left = -idx * 650 + "px";
+            }
+            setTimeout(() => {
+                lock = true;
+            }, 500)
+        }
+    </script>
+</body>
+
+</html>

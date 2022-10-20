@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    width: 400px;
+    height: 188px;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 200px;
+    position: relative;
+}
+
+.box img {
+    width: 400px;
+    height: 188px;
+}
+
+.box .text {
+    width: 400px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    bottom: -30px;
+    transition: bottom 1s ease-in-out 0s;
+}
+
+.box:hover .text {
+    bottom: 0;
+}

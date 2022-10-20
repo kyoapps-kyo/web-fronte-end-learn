@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数节流控制动画</title>
+    <style>
+        #div {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background-color: rgb(232, 123, 29);
+        }
+    </style>
+</head>
+
+<body>
+    <button id="button">开始动画</button>
+    <div id="div"></div>
+
+    <script>
+        const oBtn = document.querySelector("#button");
+        const oDiv = document.querySelector("#div");
+        let pos = 1;
+        let lock = true;
+        oBtn.onclick = moveDiv;
+        function moveDiv() {
+            if (!lock) return;
+            lock = false;
+            setTimeout(() => lock = true, 1000);
+            oDiv.style.transition = "all 1s ease 0s"
+            if (pos == 1) {
+                oDiv.style.top = 600 + "px";
+                pos = 2;
+            } else if (pos == 2) {
+                oDiv.style.top = 50 + "px";
+                pos = 1;
+            }
+        }
+    </script>
+</body>
+
+</html>

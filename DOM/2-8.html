@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习4-8</title>
+</head>
+
+<body>
+    <button id="btn">点击我试试</button>
+    <script>
+        var btn = document.querySelector("#btn");
+        var temp = true;
+        btn.onclick = function () {
+            if (temp)
+                btn.style.backgroundColor = "green"
+            else
+                btn.style.backgroundColor = ""
+            temp = !temp;
+        }
+    </script>
+</body>
+
+</html>

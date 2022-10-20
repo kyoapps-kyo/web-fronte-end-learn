@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给li绑定鼠标移入事件</title>
+    <style>
+        li {
+            transition: all .2s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>jquery</li>
+        <li>HTML5</li>
+        <li>CSS3</li>
+        <li>ES6</li>
+    </ul>
+    <script type="text/javascript">
+        //补充代码
+        const lis = document.querySelectorAll("li");
+        const lisContents = [];
+        lis.forEach(item => lisContents.push(item.textContent));
+        for (let i = 0; i < lis.length; i++) {
+            lis[i].addEventListener("mouseenter", (e) => {
+                lis.forEach(item => {
+                    item.style.color = "";
+                    item.style.fontSize = "";
+                })
+                if (lisContents[i] == e.target.textContent) {
+                    e.target.style.color = "red";
+                    e.target.style.fontSize = "22px";
+                }
+            }, false);
+        }
+    </script>
+</body>
+
+</html>

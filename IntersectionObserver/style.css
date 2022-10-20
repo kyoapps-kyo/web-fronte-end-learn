@@ -1,0 +1,97 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #000;
+}
+
+section {
+    display: grid;
+    place-items: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.content p {
+    color: #fff;
+    font-size: 1.6em;
+    width: 600px;
+    transition: all .6s cubic-bezier(.66, 0, .47, 1.23);
+}
+
+.content p:nth-child(1) {
+    font-size: 2.0em;
+    font-weight: bold;
+}
+
+.content p:nth-child(2) {
+    transition-delay: 400ms;
+}
+
+.hidden {
+    opacity: 0;
+    filter: blur(5px);
+    translate: -500px;
+}
+
+.show {
+    opacity: 1;
+    translate: 0px;
+    filter: blur(0px);
+}
+
+.content .box {
+    display: flex;
+}
+
+.content .box p {
+    width: 10px;
+    height: 10px;
+    background: linear-gradient(130deg, #2cfff4 0%, #e312cb 100%);
+    ;
+    margin-right: 10px;
+    transition: all .6s cubic-bezier(.66, 0, .47, 1.23);
+}
+
+
+.content .box p:nth-child(1) {
+    transition-delay: 1200ms;
+}
+
+.content .box p:nth-child(2) {
+    transition-delay: 1000ms;
+}
+
+.content .box p:nth-child(3) {
+    transition-delay: 800ms;
+}
+
+.content .box p:nth-child(4) {
+    transition-delay: 600ms;
+}
+
+.content .box p:nth-child(5) {
+    transition-delay: 400ms;
+}
+
+.content .box p:nth-child(6) {
+    transition-delay: 200ms;
+}
+
+.bulin {
+    animation: bulin 2s ease 0s infinite alternate;
+}
+
+@keyframes bulin {
+    from {
+        color: #ff5a5a;
+        text-shadow: 3px 3px 2px #5eff79, 0 0 5px #ff5a5a;
+    }
+
+    to {
+        color: rgb(0, 255, 242);
+        text-shadow: 3px 3px 2px #e01aa8, 0 0 5px #fcff63;
+    }
+}

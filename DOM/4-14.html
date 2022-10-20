@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算器</title>
+</head>
+
+<body>
+    <input type='text' id='num1' />
+    <select id='operate'>
+        <option value='+'>+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <input type='text' id='num2' />
+    <input type='button' value=' = ' id="btn" />
+    <input type='text' id='result' />
+    <script>
+        const operate = document.querySelector("#operate");
+        const num1 = document.querySelector("#num1")
+        const num2 = document.querySelector("#num2")
+        const result = document.querySelector("#result")
+        const btn = document.querySelector("#btn")
+        btn.addEventListener("click", function () {
+            switch (operate.value) {
+                case "+": result.value = Number(num1.value) + Number(num2.value);
+                    break;
+                case "-": result.value = Number(num1.value) - Number(num2.value);
+                    break;
+                case "*": result.value = Number(num1.value) * Number(num2.value);
+                    break;
+                case "/": result.value = Number(num1.value) / Number(num2.value);
+                    break;
+            }
+        }, false);
+    </script>
+</body>
+
+</html>

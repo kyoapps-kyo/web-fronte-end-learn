@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件传播</title>
+    <style>
+        #div1 {
+            width: 200px;
+            height: 200px;
+            background-color: #123;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #div2 {
+            width: 150px;
+            height: 150px;
+            background-color: rgb(75, 222, 97);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #div3 {
+            width: 100px;
+            height: 100px;
+            background-color: rgb(0, 128, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1">
+        <div id="div2">
+            <div id="div3"></div>
+        </div>
+    </div>
+    <script>
+        const div1 = document.querySelector("#div1");
+        const div2 = document.querySelector("#div2");
+        const div3 = document.querySelector("#div3");
+        //div1.onclick = function () {
+        //    console.log("这是点击了div1")
+        //}
+        //div2.onclick = function () {
+        //    console.log("这是点击了div2")
+        //}
+        //div3.onclick = function () {
+        //    console.log("这是点击了div3")
+        //}
+        div1.addEventListener('click', function () {
+            console.log("div1捕获阶段");
+        }, true);
+        div2.addEventListener('click', function () {
+            console.log("div2捕获阶段");
+        }, true);
+        div2.addEventListener('click', function () {
+            console.log("div2捕获阶段");
+        }, true);
+        div1.addEventListener('click', function () {
+            console.log("div1冒泡阶段");
+        }, false);
+        div2.addEventListener('click', function () {
+            console.log("div2冒泡阶段");
+        }, false);
+        div2.addEventListener('click', function () {
+            console.log("div2冒泡阶段");
+        }, false);
+    </script>
+</body>
+
+</html>
