@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map的应用练习</title>
+</head>
+
+<body>
+    <p>p1</p>
+    <p>p2</p>
+    <p>p3</p>
+    <script>
+        const [p1, p2, p3] = document.querySelectorAll("p");
+        console.log(p1, p2, p3);
+        const pm1 = new Map(
+            [
+                ["color", "red"],
+                ["backgroundColor", "yellow"],
+                ["fontSize", "40px"],
+            ]
+        );
+        const pm2 = new Map(
+            [
+                ["color", "green"],
+                ["backgroundColor", "pink"],
+                ["fontSize", "32px"],
+            ]
+        );
+        const pm3 = new Map(
+            [
+                ["color", "blue"],
+                ["backgroundColor", "orange"],
+                ["fontSize", "28px"],
+            ]
+        );
+        const m = new Map([
+            [p1, pm1],
+            [p2, pm2],
+            [p3, pm3],
+        ]);
+        m.forEach((items, el) => {
+            items.forEach((item, key) => {
+                el.style[key] = item;
+            })
+        })
+    </script>
+</body>
+
+</html>

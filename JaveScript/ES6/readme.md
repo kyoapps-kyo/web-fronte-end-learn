@@ -348,3 +348,254 @@ const logUser = ({username="Tom", age=18, sex="male" } = {}) => {
 logUser();
 logUser({username:"joy",age:19});
 ```
+
+## 剩余参数和展开运算符
+
+### 剩余参数
+
+1. 剩余参数
+
+- `const add = (x,y,z,...args) => {}` ...args 就是剩余参数，args 用法同 arguments，但 args 是一个数组，args 的变量名可以是任意符合有效命名规则的名称，只是大家习惯使用 args 来命名
+
+2. 剩余参数的注意事项
+
+- 箭头函数的剩余参数
+  - `const add = ...args => {}`错误
+  - `const add = (...args ) = > {}` 只有剩余参数时，不能省略括号
+- 使用剩余参数代替 arguments 获取实际参数
+
+- 剩余参数的位置
+  - 剩余参数只能是在最后面，剩余参数的后面不能有其他的参数
+
+3. 剩余参数的应用
+
+- 与解构赋值结合使用 `const [num, ...args] = [1, 2, 3, 4];` 解构数组 args 是数组，解构对象 args 是对象
+
+### 数组的展开运算符
+
+- ...arr
+
+- 区分剩余参数和展开运算符
+
+  - 根本区别
+    - 在函数的参数中与解构赋值结合使用时表示剩余元素；直接作为函数参数使用时表示剩余参数；展开数组中的所有元素，表示展开运算符。
+
+### 数组展开运算符的应用
+
+- 展开数组
+
+- 合并数组
+
+- 字符串转数组 `strArr = [...str]`
+
+- 常见的类数组转换成数组
+  - arguments -> `[...arguments]`
+  - NodeList -> `[...NodeList]`
+
+### 对象的展开运算符
+
+- 必须在{}括号中展开
+
+- 对象的展开： 把属性罗列出来，用逗号分隔，放到一个{}中，构成新对象
+
+- 合并对象`const obj1; const obj2; {...boj1,...obj2}`
+
+  - 这里合并对象，重复的属性会覆盖，后面的覆盖前面的
+
+### 对象展开运算符的注意事项
+
+- 空对象的展开
+  - 无任何效果
+- 非对象的展开
+  - 如果展开的不是一个对象，则会自动将其转为对象，再将其属性罗列出来
+- 对象中对象属性的展开
+  - 对象中的对象属性并不会继续展开
+
+### 对象展开运算符的应用
+
+1. 复制对象 `const obj1; const obj2 = {...obj1 }` 这里的 obj2 是新的对象
+
+2. 展开对象的函数默认参数设置
+
+```js
+const logUser = (userParam) => {
+  const defaultParam = {
+    username: "guest",
+    age: 20,
+    sex: "robot",
+  };
+  const { username, age, sex } = { ...defaultParam, ...userParam };
+  console.log(username, age, sex);
+};
+logUser({ username: "kyo", age: 18, sex: "male" });
+```
+
+## Set 和 Map 数据结构
+
+### Set
+
+- 是一系列无序、没有重复值的数据集合
+
+- Set 没有下标，不能像数组那样通过下标访问 Set 的成员
+
+- Set 实例的方法
+
+```js
+const s = new Set();
+s.add(1).add(2).add(3);
+s.has(3);
+s.delete(4); // 删除不存在的成员时，什么都不会发生
+s.clear(); // 删除全部
+```
+
+- 访问 set 中的成员，需要使用 forEach 遍历所有成员
+
+```js
+s.forEach((value, key, set) => {
+  // Set中的value == key
+  // set == s
+});
+//回调的是function而不是箭头函数时，可以通过设置第二个参数指定指向对象
+s.forEach(function (value, key, set) {
+  // Set中的value == key
+  // set == s
+}, document);
+```
+
+- 按集合添加的先后顺序遍历
+
+- Set 实例的属性 s.size()
+
+- Set 构造函数的参数
+
+  1. 数组作为参数，返回一个将数组去重复的 set 集合
+
+  2. 字符串、arguments、NodeList、Set 等
+
+- 注意事项
+
+  1. 判断重复值
+
+  - Set 对重复值的判断基本遵循严格相等===
+  - 但是对于 Nan 的判断与===不同，Set 中 NaN 等于 Nan
+
+  2. 使用 Set 的情况
+
+  - 对一个数组或字符串去重的时候
+  - 不需要通过下标访问，只需要遍历的时候
+  - 为了使用 Set 提供的属性和方法的时候（add delete clear has forEach size 等）
+
+- Set 的应用
+
+  1. 数组去重与 Set 还原为数组 `s = new Set(arr); arr = [...s];`
+  2. 字符串去重与 Set 还原为字符串 `s = new Set(str); str = [...s].join("")`
+  3. 存放 DOM 标签
+
+### Map
+
+- 和对象类似，是键值对的集合
+
+- 和对象的区别
+
+  - 对象的 key 只能是 string 类型
+
+  - Map 对象的 key 可以是
+    - 基本数据类型：数字、字符串、布尔值、undefined、null
+    - 引用数据类型：对象([],{},function,Set,Map...)
+    - 以上都可以作为 Map 的键
+
+- Map 实例的方法和属性
+
+```js
+//方法
+const m = new Map();
+m.set("age", 18).set(true, "true").set(null, undefined); // set添加新成员，键如果已经存在，后添加的键值对覆盖已有的
+m.get("age"); //18
+m.has(true); //true
+m.delete(true); // 删除不存在的成员不会报错
+m.clear(); //全删除
+
+m.forEach(function (value, key, map) {}, document);
+
+m.size();
+```
+
+- Map 构造函数的参数
+
+  1. 二维数组，必须体现出键和值的数组
+
+  ```js
+  new Map([
+    ["name", "Tom"],
+    ["age", "18"],
+    ["sex", "male"],
+  ]);
+  ```
+
+  2. Set Map 等
+
+- Map 的注意事项
+
+1. 判断键名是否相同的方式
+   - 同 Set 一样，遵循严格相等，但是 NaN 是例外
+2. 什么时候使用 Map
+   - 只需要键值对的结构，或者需要字符串以外的值做键，使用 Map 更合适
+
+## Iterator 和 for of
+
+### Iterator 的作用
+
+- 遍历器（迭代器）
+
+- 可遍历对象（可迭代对象），有一个 next 方法，通过 next 方法可以得到一个对象，对象里面包含一个 value 和一个 done 属性
+
+- Symbol.iterator：可遍历对象的生成方法的键
+
+```javascript
+const it = [1, 2, 3, 4][Symbol.iterator]();
+console.log(it.next()); // value: 1, done: false;
+console.log(it.next()); // value: 2, done: false;
+console.log(it.next()); // value: 3, done: false;
+console.log(it.next()); // value: 4, done: false;
+console.log(it.next()); // value: undefined, done: true;
+```
+
+- Iterator 表示的是一个过程：Symbol.iterator（可遍历对象的生成方法）->it（可遍历对象）->it.next() -> it.next()->...（直到 done 为 true）
+
+```js
+//在对象中使用Symbol
+const b = Symbol("symbol-name");
+const obj = {
+  name: "name",
+  [b]: "value",
+};
+```
+
+### 为什么需要 Iterator 遍历器
+
+- Iterator 遍历器是一个统一的遍历方式，适合任何拥有[Symbol.iterator] 属性的对象： Array、Set、Map
+
+- 为了方便使用 Iterator 遍历器，制定了 for of 循环，将 Iterator 底层逻辑封装在了 for of 里面
+
+### for...of 的基本能用法
+
+- `for(const item of arr){ console.log(item) }`
+
+- 如何在 for of 中取得数组的索引
+
+```js
+arr.keys(); // 获得数组键的可遍历对象
+for (const key of arr.keys()) {
+  console.log(key); // 这里打印出的就是数组的索引值
+}
+arr.values(); // 获得数组值的可遍历对象
+for (const value of arr.values()) {
+  console.log(value); // 这里打印出的就是数组的值
+}
+arr.entries(); // 获得的是索引值+数组值组成的数组的可遍历对象
+for (const [index, value] of arr.entries()) {
+  console.log(index, value); // 这里打印出的就是数组的index和value
+}
+```
+
+[返回最上部](#ecmascript6)
