@@ -598,4 +598,120 @@ for (const [index, value] of arr.entries()) {
 }
 ```
 
-[返回最上部](#ecmascript6)
+### 原生可遍历和非原生可遍历
+
+- 只要有 Symbol.iterator 方法，并且这个方法可以生成可遍历对象，就是可遍历的
+
+- 只要可遍历，就可以使用 for...of 循环来统一遍历
+
+- 原生可遍历的数据类型
+
+  1. Array
+  2. String
+  3. Set
+  4. Map
+  5. arguments
+  6. NodeList
+
+- 非原生可遍历
+  [实例代码](./2-11.js)
+
+### 使用了 Iterator 的场合
+
+1. 数组的展开运算符
+
+2. 数组的解构赋值
+
+3. Set 和 Map 的构造函数
+
+## ES6 新增方法
+
+### 字符串新增方法
+
+1. includes()
+
+   - (Array || String).includes(target, index?)
+   - index default 0;
+   - [应用](./2-1.js)
+
+2. padStart() padEnd()
+
+   - `padStart(length, str)`, length 字符补全后的长度，str 从头部开始补全的字符
+   - `padEnd(length, str)`, length 字符补全后的长度，str 从尾部开始补全的字符
+   - 原字符的长度，等于或大于最长长度，不会消减源字符串，字符串补全不生效，返回源字符串
+     - `console.log('xxx'.padStart(2,'ab')) // xxx`
+   - 用来补全的字符串与源字符串长度之和超过了最大长度，截去超出位数的补全字符串，原字符串不动
+     - `console.log('abc',padStart(10,'0123456789')) // 0123456abc`
+   - 如果省略第二个参数，默认使用空格补全长度
+     - `console.log('x'.padStart(4)) // x`
+   - [应用](./2-5.sj)
+
+3. trimStart() trimEnd()
+
+   - 去除头部或者尾部的空格
+   - `trimStart()=trimLeft trimEnd()=trimRight()`
+   - 前后都去除 trim()
+   - 表单提交前后去空格
+
+4. replaceAll() -` replaceAll(searchValue, replacement)`
+   - 如果 searchValue 是一个不带/g 的正则表达式，报错
+   - 将找到的符合 searchValue 全部提换乘 replacement
+
+### ES6 中数组新增方法
+
+1. includes() 基本同字符串
+
+   - 注意点是对 NaN 的判读，数组 includes 方法中的 NaN 是被判断为相等的
+
+2. Array.from()
+
+   - 将其他类型转换为数组
+   - 可转换的类型：
+     - 所有可遍历的类型，不如直接[...object]
+     - 拥有 length 的任意对象
+     ```js
+     const obj = {
+       0: 1,
+       1: 2,
+       name: "tom",
+       length: 3,
+     };
+     const arr = Array.from(abj); // [1,2, undefined]
+     ```
+   - 第二个可选参数：是一个 callback，作用类似于数组的 map 方法
+
+   ```js
+   const arr = Array.from("12345", (value) => value * 2);
+   //arr = [2,4,6,8,10]
+   //作用同
+   Array.from("12345").map((value) => value * 2);
+   //[2,4,6,8,10]
+   ```
+
+   - 第三个可选参数，修改 this 指向
+
+3. find() findIndex
+
+   - find()：找到满足条件的一个立即返回
+   - findIndex()：找到满足条件的一个，立即返回其索引
+   - `arr.find((value, index, arr) =>{ 遇到满足条件的就返回当前值 }, 指向对象)`
+   - `arr.find((value, index, arr) =>{ 遇到满足条件的就返回当前索引 }, 指向对象)`
+
+### 对象的新增方法
+
+1. Object.assign(obj1,obj2...) 将后一个对象合并到前一个对象，返回值是更改后的第一对象。
+
+   - 和{...obj1,...obj2...}这样合并不同，这里的的对象是一个新对象
+   - `Object.assign({},obj1 ,obj2...)`，这样可以返回一个新的对象
+   - `assign(target,source)`,第一个参数之后的都是源对象
+     - 基本数据类型作为源对象，与对象的展开类似，先转换成对象，在合并，**除了字符串外**，其他转换过来都是空对象
+   - 同名属性：后面的属性直接覆盖前面的属性
+   - [应用](./4-1.js)
+
+2. Object.keys() Object.value() Object.entries()
+
+   - 返回：key 的数组、值的数组、键值对的数组（二维）
+   - 与数组类似方法的区别，对象的是构造函数的方法调用，数组是实例调用方法`arr.keys() //返回Iterator... Object.keys(obj) //返回数组`
+   - 可以通过使用这三个方法，让对象可以使用 for of 遍历，作用等同于 for in，！！这样遍历不能保证顺序！！！
+
+   <div style="text-align:right;font-size:1.5rem; margin-top:2rem;"><a href="#ecmascript6">返回顶部</a></div>
