@@ -714,4 +714,4 @@ for (const [index, value] of arr.entries()) {
    - 与数组类似方法的区别，对象的是构造函数的方法调用，数组是实例调用方法`arr.keys() //返回Iterator... Object.keys(obj) //返回数组`
    - 可以通过使用这三个方法，让对象可以使用 for of 遍历，作用等同于 for in，！！这样遍历不能保证顺序！！！
 
-   <div style="text-align:right;font-size:1.5rem; margin-top:2rem;"><a href="#ecmascript6">返回顶部</a></div>
+<a href="#ecmascript6">返回顶部</a>
