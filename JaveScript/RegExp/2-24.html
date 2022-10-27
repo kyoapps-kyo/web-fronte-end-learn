@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单输入验证</title>
+</head>
+
+<body>
+    <div>
+        <p>请输入中文姓名:
+            <input id="name" type="text">
+            <span class="warning" style="color:red;">输入的姓名不合法</span>
+        </p>
+    </div>
+    <script>
+        const name = document.getElementById("name");
+        const warning = document.getElementsByClassName("warning")[0];
+        console.log(name, warning);
+        warning.style.display = 'none';
+        const nameReg = /^[\u4E00-\u9FA5]{2,5}$/
+        name.onblur = function () {
+            if (nameReg.test(name.value) || name.value == "") {
+                warning.style.display = 'none';
+            } else
+                warning.style.display = 'inline';
+        }
+    </script>
+</body>
+
+</html>
