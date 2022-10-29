@@ -714,4 +714,328 @@ for (const [index, value] of arr.entries()) {
    - 与数组类似方法的区别，对象的是构造函数的方法调用，数组是实例调用方法`arr.keys() //返回Iterator... Object.keys(obj) //返回数组`
    - 可以通过使用这三个方法，让对象可以使用 for of 遍历，作用等同于 for in，！！这样遍历不能保证顺序！！！
 
+# Promise
+
+## Promise 是什么
+
+- Promise 是一部操作的一种解决方案
+
+- Promise 是为了解决层层嵌套的回调函数而出现的(callback hell)
+
+## Promise 的基本用法
+
+- 实例化构造函数生成实例对象
+
+  - `const p = new Promise(()=>{})`
+
+- Promise 的状态
+
+  ```js
+  const p = new Promise((resolve, reject) => {
+    // 开始的时候，Promise是pending，未完成的状态
+    //执行resolve()，变成fulfilled / resolved，成功的状态， pending -> fulfilled
+    //执行reject()，变成rejected，失败的状态， pending -> rejected
+  });
+  ```
+
+  - Promise 的状态一旦发生改变，就不会再改变了
+
+- then()
+
+  ```js
+  //resolve()执行后，then中第一个回调函数会执行
+  //reject()执行后，then中第二个函数执行
+  p.then(
+    () => {
+      console.log("success");
+    },
+    () => {
+      console.log("error");
+    }
+  );
+  ```
+
+- resolve reject 的参数
+
+  ```js
+  const p = new Promise((resolve, reject) => {
+    //resolve({ username: "Tom" });
+    //reject(new Error("reason"));
+  });
+  p.then(
+    (data) => {
+      console.log("success", data);
+    },
+    (err) => {
+      console.log("error", err);
+    }
+  );
+  ```
+
+## then()
+
+- 什么时候执行
+
+  - `pending -> fulfilled 执行then的第一个回调函数 `
+  - `pending -> rejected 执行then的第二个回调函数 `
+
+- 执行后的返回值
+
+  - then 方法执行后返回一个新的 Promise 实例对象
+
+- then 方法返回的 Promise 对象的状态改变
+
+  ```js
+  then(
+    () => {
+      //在这个回调函数的末尾，又一个隐藏的return
+      //return 会返回一个用Promise包装的值，默认用resolve方法传给下一个then，比如
+      return 123;
+      //相当于
+      return new Promise((resolve, reject) => {
+        resolve(123);
+      });
+      //所以这里如果想改变下一个then的状态，调用reject即可
+      return new Promise((resolve, reject) => {
+        reject(123);
+      });
+    },
+    () => {}
+  ).then(
+    (data) => {
+      console.log("success2", data); //默认执行
+    },
+    (err) => {
+      console.log("err", err); //如果上一个then return的Promise调用的是reject方法，执行这个
+    }
+  );
+  ```
+
+  - 不管上一个 then 执行的是成功回调还是失败回调，都不会影响像一个 then 要执行哪一个回调函数，都是默认执行成功
+  - 默认返回永远都是执行成功状态的 Promise 对象，传递的值默认是 undefined
+  - 只有上一个 then 的回调函数中，return 中的 Promise 执行了 reject，下一个 then 的状态才会被改变
+
+- 向后传值
+
+- 使用 Promise 解决回调地狱
+
+  - [练习](./3-4.js)
+
+## catch()
+
+- catch()专门用来处理 reject 状态
+
+- catch 本质是 then 的特例，相当于`then(null, err=>{})`
+
+- then 中的 reject 会一直往下传，知道被捕获才会停止，所以 then 没有处理 reject，reject 会一直传递，直到被 catch()捕获
+
+- catch 可以捕获它前面的错误
+
+- 一般总是建议，Promise 对象后面要跟 catch 方法，这样可以处理 Promise 内部发生的错误
+
+- 抛出错误的两种方法：
+  - 在 then 中执行 reject
+  - 不执行 reject，执行`throw new Error("err info")`
+
+## finally()
+
+- 不常用方法
+
+- 只需要知道 finally 是干嘛的
+
+- 本质也是个特殊的 then 方法
+
+  ```js
+  new Promise((resolve, reject) => {
+    //resolve(123);
+    reject("reason");
+  })
+    //这个then就相当于finally方法
+    .then(
+      (result) => {
+        return result;
+      },
+      (err) => {
+        return new Promise((reject) => {
+          reject(err);
+        });
+      }
+    )
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  ```
+
+- 当 Promise 状态发生改变时，不论如何变化都会执行，不变化不执行
+
+- 应用： 使用 Promise 操作数据库，最后关闭数据库的操作
+
+## Promise.resolve() Promise.reject()
+
+- 本质
+
+  - Promise.resolve()是成功状态的一种简写形式
+
+  ```js
+  new Promise((resolve) => resolve("foo"));
+  //简写
+  Promise().resolve("foo");
+  //参数
+  /**
+   * 一般参数
+   */
+  Promise.resolve("foo").then((data) => console.log(data));
+  /**
+   * Promise对象作为参数
+   */
+  const p1 = new Promise((resolve) => {
+    setTimeout(resolve, 1000, "我执行了");
+  });
+  Promise.resolve(p1).then((data) => console.log(data));
+  //等价于
+  //当Promise.resolve()接收的是Promise对象时，直接返回这个Promise对象，什么都不做
+  p1.then((data) => {
+    console.log(data);
+  });
+  Promise.resolve(p1) === p1; // true
+  //当一般的resolve函数接收的是Promise对象时，后面的then会根据传递的Promise对象的状态变化决定执行哪一个回调
+  new Promise((resolve) => resolve(p1)).then((data) => {
+    console.log(data);
+  });
+  /**
+   *  具有then方法的对象
+   */
+  const thenable = {
+    then() {
+      console.log("then");
+    },
+  };
+  Promise.resolve(thenable).then(
+    (data) => console.log(data),
+    (err) => console.log(err)
+  );
+  //此时会执行thenable中的then方法，Promise之后的then方法不会执行，因为没有resolve或者reject改变状态，想要执行后面的then方法中的回调函数，如下改写
+  const thenable2 = {
+    then(resolve, reject) {
+      resolve("success");
+      //失败
+      reject("reason");
+    },
+  };
+  Promise.resolve(thenable2).then(
+    (data) => console.log(data),
+    (err) => console.log(err)
+  );
+  //此时就会根据状态选择接下来的要执行的回调函数
+  ```
+
+  - Promise.reject()
+
+  ```js
+  //是Promise失败状态的一种简写：
+  new Promise((resolve, reject) => {
+    reject("reason");
+  });
+  //等价于
+  Promise.reject("reason");
+  //参数
+  //不管是什么参数，都会原封不动的向后传递，作为后续方法的参数
+  ```
+
+- 在 then 方法中的应用
+  ```js
+  then((data) => {
+    return Promise.reject("reason");
+  });
+  ```
+
+## Promise.all()
+
+- 作用： 关注多个 Promise 对象的状态变化，传入多个 Promise 实例，包装成一个新的 Promise 实例返回
+
+- 基本用法
+
+  ```js
+  const delay = (ms) => {
+    return new Promise((resolve) => {
+      setTimeout(resolve, ms);
+    });
+  };
+  const p1 = delay(1000).then(() => {
+    console.log("p1完成了");
+    return "p1";
+  });
+  const p2 = delay(2000).then(() => {
+    console.log("p2完成了");
+    return "p2";
+  });
+  const p = Promise.all([p1, p2]);
+  p.then(
+    (data) => {
+      console.log(data);
+    },
+    (err) => {
+      console.log(err);
+    }
+  );
+  // 成功情况下，打印输出：
+  // p1 完成了
+  // p2 完成了
+  // 等待前面的p1,p2完成后，p才会开始执行，data接收p1,p2返回的值组成的数组["p1", "p2"]
+  // ["p1", "p2"]
+  ```
+
+  - Promise.all() 的状态变化于所有传入的 Promise 实例对象状态有关
+  - 所有状态都变成 resolved / fulfilled，最终的状态才会变成 resolved
+  - 只要一个变成 rejected，最终状态就会变成 rejected
+  - 作用
+    - 请求多少数据，只有全部数据请求成功，才会执行之后的操作
+
+## Promise.race() Promise.allSettled()
+
+- 作用
+
+  - Promise.race([Promise Array])的状态取决于第一个完成的 Promise 实例对象，如果第一个完成的成功了，那最终的就成功，如果第一个失败了，最终的就失败
+  - Promise.race([Promise Array])返回第一个 Promise 实例的返回值
+
+  - Promise.allSettled([Promise Array])，状态与传入的 Promise 状态无关，永远都是成功的，它只会忠实记录下各个 Promise 的表现
+
+- 用法
+
+## Promise.any()
+
+- Promise.any()与 Promise.race()非常相似。
+
+- 参数中的 Promise 都失败最终才会失败
+
+- 只返回参数中的第一个成功的 Promise 实例，终止之后的实例。
+
+- 实际应用：一次性加载多张图片时，哪一张先加载出来就显示哪一张，此时就可以使用 Promise.any()方法
+
+## Promise 的注意事项
+
+- resolve 和 reject 执行后的代码
+
+  - 推荐在调用 resolve 和 reject 函数的时候加上 return，不再执行它们后面的代码
+  - `return resolve() / reject()`
+
+- Promise.all/race/allSettled/any 的参数问题
+
+  - 参数如果不是 Promise 数组，会将不是 Promise 的数组元素变成 Promise 对象
+
+  - Iterator 对象，Array、String、Set、Map、NodeList、arguments
+
+  - 写了 Symbol.iterator 方法的非原生可遍历对象
+
+- Promise.all/race/allSettled/any 的错误处理
+
+  - 可以单独的在 Promise 实例中捕获错误
+
+  - 也可以统一由 Promise 构造函数的方法处理
+
+- Promise 的应用
+
 <a href="#ecmascript6">返回顶部</a>
