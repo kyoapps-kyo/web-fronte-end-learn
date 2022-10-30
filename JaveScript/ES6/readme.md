@@ -1258,4 +1258,6 @@ for (const [index, value] of arr.entries()) {
 
 ## Module 的应用
 
+- [模块化拆分](./ClassLianxi/)
+
 <a href="#ecmascript6">返回顶部</a>
