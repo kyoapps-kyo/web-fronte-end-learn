@@ -1165,4 +1165,97 @@ for (const [index, value] of arr.entries()) {
 
 - [练习](./ClassLianxi)
 
+# 模块化
+
+## Module
+
+- 在没有模块化之前，使用 IIFE 模拟私有化，使用块级限定变量的作用域，再通过 window 暴露需要的变量
+
+- 模块系统主要用来解决的问题
+  1.  模块化的问题
+  2.  消除全局变量
+  3.  管理加载顺序
+
+## Module 的基本用法
+
+- 导出：`export default class`;
+
+- 引入：`import class from "path"`;
+
+- 引入 script 文件，`<script src="./index.js" type="module"></script>`
+
+## Module 的两种导入导出
+
+- 一个模块没有导出，也可以将其导入
+
+- 被导入的代码都会执行一遍，也仅将执行一遍
+
+- export default 导出和对应的 import 导入
+
+  - 导出的变量/常量/对象/数值/class 可以随便取名
+
+  - 一个模块只能有一个 export default
+
+- export 导出和对应的 import 导入
+
+  - 基本用法
+
+    - export 后面接声明或者语句
+      1.  第一种方式：`export const age = 18;`
+      2.  第二种方式：`const age = 18; export {age};`
+    - 导入`import {age} from "path"`，导入名字要与导出名对应
+
+  - 多个导出
+
+    - 单个单个声明导出
+    - 先完之后，用对象的形式一次导出`export {a,b,c,...}`
+
+  - 导入导出时起的别名
+
+    - `export {fna as fnb,b}`
+    - `import {fnb, b as fnc} from "path"`
+
+  - 整体导入
+
+    - `import * as obj from "path"`
+    - - 可以包括 export default
+    - export default 可以和 export 同时使用
+
+  - 同时导入
+
+    - `import fromDefault, {fromExport} from "path"`
+    - 分开写也可以，写在一起的时候需要先写 default 导出来的
+
+## Module 的注意事项
+
+- 模块顶层的 this 指向
+
+  - 指向 undefine，可以作为检测模块是不是按模块加载
+  - 模块文件中
+
+    ```js
+    if (typeof this !== undefined) {
+      throw new Error("请使用模块的方式加载");
+    }
+    ```
+
+- import 关键字和 import()函数
+
+  - import 具有提升效果，会提升到整个模块的头部，率先执行
+  - import export 命令只能在模块的顶层，不能在代码块中执行
+  - 如果要按条件/按需导入，使用 import()函数
+  - import()函数返回一个 Promise 对象，可以通过 then/catch 处理导入后的结果
+
+- 导入导出的复合写法
+  - `export { age } from "path"`
+  - 等价于
+  ```js
+  import { age } from "path";
+  export { age } from "path";
+  ```
+  - 两种写法不同在于，第一种当前文件访问不到 age，只起一个中转作用
+  - 第二种方法当前文件可以访问到 age
+
+## Module 的应用
+
 <a href="#ecmascript6">返回顶部</a>
