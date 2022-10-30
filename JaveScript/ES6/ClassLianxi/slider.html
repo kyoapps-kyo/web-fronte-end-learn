@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Class 的应用</title>
+  <link rel="stylesheet" href="./slider.css" />
+</head>
+
+<body>
+  <div class="slider-layout">
+    <a href="javascript:;" id="left_btn">&lt;</a>
+    <a href="javascript:;" id="right_btn">&gt;</a>
+    <div class="slider">
+      <div class="slider-content">
+        <div class="slider-item">
+          <a href="javascript:;"><img src="./imgs/1.jpg" alt="1" class="slider-img" /></a>
+        </div>
+        <div class="slider-item">
+          <a href="javascript:;"><img src="./imgs/2.jpg" alt="1" class="slider-img" /></a>
+        </div>
+        <div class="slider-item">
+          <a href="javascript:;"><img src="./imgs/3.jpg" alt="1" class="slider-img" /></a>
+        </div>
+        <div class="slider-item">
+          <a href="javascript:;"><img src="./imgs/4.jpg" alt="1" class="slider-img" /></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./base.js"></script>
+  <script>
+    // console.log(BaseSlider);
+
+    class Slider extends BaseSlider {
+      constructor(el, options, btn) {
+        super(el, options);
+        if (btn.leftBtn.nodeType !== 1 || btn.rightBtn.nodeType !== 1) throw new Error('实例化的时候，请传入 DOM 元素！');
+        this.leftBtn = btn.leftBtn;
+        this.rightBtn = btn.rightBtn;
+        this._bindEvent();
+      }
+
+      _bindEvent() {
+        document.addEventListener('keyup', ev => {
+          // console.log(ev.keyCode);
+          if (ev.keyCode === 37) {
+            // ←
+            this.prev();
+          } else if (ev.keyCode === 39) {
+            // →
+            this.next();
+          }
+        });
+        this.leftBtn.onclick = () => {
+          this.prev();
+        }
+        this.rightBtn.onclick = () => {
+          this.next();
+        }
+      }
+    }
+
+    const left = document.querySelector("#left_btn")
+    const right = document.querySelector("#right_btn")
+    new Slider(document.querySelector('.slider'), {
+      initialIndex: 1,
+      animation: true,
+      speed: 1000
+    }, { leftBtn: left, rightBtn: right });
+
+  </script>
+</body>
+
+</html>

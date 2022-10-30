@@ -1038,4 +1038,131 @@ for (const [index, value] of arr.entries()) {
 
 - Promise 的应用
 
+# Class
+
+## Class 基础
+
+- 声明 class
+
+  - 关键字
+
+  ```js
+  class ClassName {
+    //实例化时执行构造方法，所以必须有构造方法，但可以不写
+    constructor(name, age, ...) {
+      console.log("实例化时，会自动执行构造方法里面的语句");
+      this.name = name;
+      this.age = age;
+      ...
+      // 一般在构造方法中，只定义属性，方法不在构造方法中定义
+    }
+    //方法构造在构造函数外
+    //各个实例会共享方法，同原型链方法的用法
+    speak(){}
+  }
+  ```
+
+- class 对比构造函数
+
+## class 两种定义形式
+
+- 声明形式
+
+- 表达式形式
+  - `const Person = class{}`
+  - `new (class{construct(){}})()` 立即执行类
+
+## 实例属性、静态方法和静态属性
+
+- 实例属性
+
+  - 构造方法中声明的属性，就是实例属性，直接可以通过实例打点调用
+  - 在构造方法外直接添加 `class Person{ age = 18;}`不需要写任何关键字
+  - 将上面的值换成 function(){}就变成了实例方法，不推荐这种方法，会造成每个实例都重复构建一个新的函数，造成内存浪费
+
+- 静态方法（类的方法）
+
+  - 关键字 `static functionName (){}`
+  - 使用类名调用，Person.speak()
+  - 静态方法中 this 指向的是类本身
+  - 在类内部使用`static functionName (){}`等同与在类外面使用`className.functionName = function(){}`
+
+- 静态属性（类的属性）
+
+  - 使用 static 关键字修饰属性名，目前只是提案，有兼容性的问题
+  - 解决办法是，用静态方法直接返回需要的值`static getVersion (){return 1.1;}`
+
+- [练习](./class3-3.js)
+
+## 私有属性和方法
+
+- 为什么需要私有属性和方法
+
+- 模拟私有属性和方法
+
+  1.  \_开头表示私有，约定，不是强制， `_name, _functionName`
+  2.  将私有属性和方法移出类，使用 IIFE 构成块级作用域
+
+  ```js
+  (function(){
+    let name;//没有通过window暴露出去，IIFE外面不会被找到
+    class Person(){
+      constructor(username){
+        //this.name = name;
+        name = username;
+      }
+      speak(){
+        console.log("speak")
+      }
+      getName(){
+        return name;
+      }
+    }
+    window.Person = Person;
+  })()
+  ```
+
+## extends
+
+- 子类继承父类
+
+  ```js
+  class Programmer extends Person {
+    constructor(name, sex) {
+      super(name, sex); //要调用父类的构造方法
+    }
+  }
+  ```
+
+- 改写继承的属性或方法
+
+  - 子类直接写父类的同名方法，发生同名覆盖
+  - 直接可以添加新的方法属性
+
+## super
+
+- 作为函数使用
+
+  - 作为父类的构造方法，只能用在子类的构造方法中，用在其他地方会报错
+  - super 虽然代表了父类的构造方法，但是内部的 this 指向子类的实例
+
+- 作为对象使用
+
+  - 在构造方法或一般方法中使用
+    - 代表父类的原型对象 Parent.prototype
+    - 定义在父类实例上的方法或属性，无法通过 super 调用
+    - 通过 super 调用父类方法时，方法内部的 this 指向当前的子类实例
+  - 在静态方法中使用
+    - 指向父类，而不是父类的原型对象
+    - 通过 super 调用父类的方法时，方法内部的 this 指向当前的子类，而不是子类的实例
+
+- 注意事项
+
+  - 使用 super 的时候，必须显式指定是作为函数还是作为对象使用，否则会报错
+  - 子类不写 super 的情况 - 没有写 constructor 时可以不写 super 函数
+
+## class 的应用
+
+- [练习](./ClassLianxi)
+
 <a href="#ecmascript6">返回顶部</a>
