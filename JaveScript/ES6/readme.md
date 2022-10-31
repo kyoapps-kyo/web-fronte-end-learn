@@ -1260,4 +1260,282 @@ for (const [index, value] of arr.entries()) {
 
 - [模块化拆分](./ClassLianxi/)
 
+# Babel 和 Webpack
+
+## Babel
+
+- Babel 是什么
+
+  - Babel js 编译器，将最新的 js 版本转化成兼容性版本
+
+  - Babel 本身可以编译 ES6 的大部分语法，比如 let、const、箭头函数、类等
+
+  - 但是对于 ES6 新增的 API，比如 SET、Map、Promise 等全局对象，以及一些定义在全局对象上的方法（比如 Object.assign/Array.from）都不能直接编译，需要借助其他的模块
+
+  - Babel 一般需要配合 Webpack 来编译模块语法
+
+- Babel 的使用方式
+
+  - 使用环境 nodejs，工具 npm
+
+    - `yarn add -D @babel/core @babel/cli`
+
+  - 编译命令
+
+    - `"build":"babel src -d dist"` -d --out-dir 的缩写
+
+  - Babel 的配置文件
+
+    - .babelrc
+
+      - `"presets": ["@babel/preset-env"]`
+
+## Webpack
+
+- Webpack
+
+  - 静态模块打包器，当 webpack 处理应用程序时，会将所有这些模块打包成一个或多个文件
+
+  - 模块：处理 js/css/图片、图标字体文件
+
+  - 静态：开发过程中存放在本地的 js/css/图片/图标字体等文件，就是静态的
+
+  - 动态内容，webpack 没办法处理，只能处理静态的内容
+
+- 理解 webpack
+
+- 启动 webpack
+
+  - 初始化：
+
+  - 安装 webpack 需要的包：
+
+    - `yarn add -D webpack-cli webpack`
+
+  - 配置 webpack：
+
+    - `webpack.config.js`
+
+  - 打包并测试：
+
+    - `"webpack": "webpack --config webpack.config.js"`
+    - --config 后面指定配置文件名
+    - 如果使用的是默认配置文件，直接使用`webpack`即可
+    - `"webpack": "webpack"`
+
+### Webpack 的核心概念
+
+- entry
+
+  - 指定入口文件
+
+    ```js
+    //两种写法
+    entry : "./src/index.js",
+    //
+    entry : {
+      main: "./src/index.js",
+      search: "./src/search.js"
+    }
+    ```
+
+- output
+
+  - 出口文件
+    ```js
+    //单入口对应的出口写法
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "bundle.js",
+    }
+    //多入口对应的出口写法
+    //[name]对应的是多入口中的main、search等等，将对应的名字替换
+    output: {
+      path: path.resolve(__dirname, "dist"),
+      filename: "[name].js",
+    }
+    ```
+
+- loader
+
+  - loader 概念 : 加载器
+
+    - loader 让 webpack 能够去处理那些非 JS 文件的模块
+
+  - babel-loader
+
+    - 使用 babel-loader 后，通过 webpack 调用 babel 进行编译，此时不需要安装 babel-cli 了
+    - `yarn add -D @babel/preset-env @babel/core babel-loader`
+
+  - 配置 babel-loader
+
+  ```js
+
+  module: { // 模块，接一个对象
+    rules: [  //有很多规则，用数组
+      {
+        test: /\.js$/,  //命令，编译.js结尾的所有文件
+        exclude: /node_modules/,   // 排除node_modules文件夹里面的内容
+        loader: "babel-loader",   //连通babel，通过babel编译
+      },
+    ],
+  },
+  ```
+
+  - 让 babel 可以编译 ES6 新的 API
+
+    - `@babel/polyfill` - 安装 `yarn add -D core-js`
+    - 在源码中引用 `import "core-js/stable";`
+
+  - [官方 loader 配置文档](https://webpack.docschina.org/loaders/)
+
+- plugins
+
+  - plugins 插件
+
+    - loader 用于帮助 webpack 处理各种模块，插件用于执行范围更广的任务
+
+    - [官方插件列表](https://webpack.docschina.org/plugins/)
+
+  - html-webpack-plugin
+
+    - `yarn add -D html-webpack-plugin`
+
+    - `const HtmlWebpackPlugin = require("html-webpack-plugin");`
+
+    ```js
+    plugins: [
+      new HtmlWebpackPlugin({
+          template: "./index.html",
+        }),
+      ],
+    ```
+
+  - 多入口插件配置文件写法
+    ```js
+    //有几个文件就实例化几个，指明生成的对应的文件名，再使用chunks指定对应的js文件
+    plugins: [
+      new HtmlWebpackPlugin({
+          template: "./index.html",
+          filename: "index.html",
+          chunks:["index"]
+          minify:{
+            //删除index.html中的注释
+            removeComments: true,
+            //删除index.html的空格
+            collapseWhitespace: true,
+            //删除各种html标签属性值的双引号
+            removeAttributeQuotes: true
+          }
+        }),
+      new HtmlWebpackPlugin({
+          template: "./search.html",
+          filename: "search.html"
+          chunks:["search"]
+        }),
+      new HtmlWebpackPlugin({
+          template: "./about.html",
+          filename: "about.html"
+          chunks:["about"]
+        }),
+      ],
+    ```
+
+### webpack 的应用 - 处理 css 文件
+
+- 使用 webpack 可以在 js 文件中导入 css 文件
+
+  - 使用 css-loader 加载 css 文件
+
+    - `yarn add -D css-loader`
+    - `yarn add -D style-loader`
+
+    ```js
+    {
+        test: /\.css$/,
+        // loader: "css-loader",
+        //配置多个loader处理同一个类型的文件时，使用use
+        //这里需要注意的是，使用顺讯是从右到左
+        //先加载css，在交给style处理css文件
+        use: ["style-loader", "css-loader"],
+    }
+    ```
+
+    - 成功引入后，会在 head 标签内，以 style 的形式写入
+    - 使用 link 标签引入方法：
+
+      - `yarn add -D mini-css-extract-plugin`
+
+      ```js
+      const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+      {
+        test: /\.css$/,
+        // loader: "css-loader",
+        //配置多个loader处理同一个类型的文件时，使用use
+        //这里需要注意的是，使用顺讯是从右到左
+        //先加载css，在交给style处理css文件
+        // use: ["style-loader", "css-loader"],
+        // 不使用style-loader，通过提取css到link加载
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      new MiniCssExtractPlugin({
+        filename: "./css/[name].css",
+      }),
+      ```
+
+### webpack 处理 CSS 文件中的图片
+
+- file-loader
+
+  - 外部资源，如从网络上引入的图片，不需要考虑 webpack，只有本地图片才需要被 webpack 处理
+  - `yarn add -D file-loader`
+
+  [x] webpack5 中有问题，解决办法，不需要 file-loader,直接在 output 下写入静态文件地址，不需要给 MiniCss 插件写 publicPath 也可以直接引用到文件
+
+  ```js
+  output: {
+    filename: 'main.js',
+    path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[name][ext]'
+    //或者
+    assetModuleFilename: 'images/[hash][ext]'
+  }
+  ```
+
+### webpack 处理 html 文件中的图片
+
+- 因为定义了入口文件是 index.js，webpack 只会处理 index.js 中引入的资源，对于 html 中引入的资源不会处理，所以需要使用特定的 html-withimg-loader 来处理 html 中引用的资源
+
+- `yarn add -D html-loader`
+
+```js
+{
+  test: /\.(html|html)$/i,
+  loader: "html-loader",
+},
+```
+
+### webpack 处理 js 文件中的图片
+
+- js 文件中： `import img from './images/bg.jpg'`
+
+- 加入规则，将静态资源输出到指定的目录
+
+```js
+      {
+        test: /\.(png|jpg|gif|jpeg)$/,
+        type: "asset/resource",
+      },
+```
+
+### webpack 的内部资源 inline
+
+---
+
+### 搭建开发环境
+
+- `yarn add -D webpack-dev-server`
+
+- scripts: `"dev" : "webpack-dev-server --open"`
+
 <a href="#ecmascript6">返回顶部</a>
