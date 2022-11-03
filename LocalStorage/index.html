@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用Cookie实现中英文切换</title>
+    <style>
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            gap: 0.5em;
+            margin-top: 1em;
+        }
+
+        form input[type="submit"] {
+            width: 100px;
+            align-self: end;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="cn">中文</button>
+    <button id="en">英文</button>
+    <form id="form" action="./">
+        <input type="text" name="username">
+        <input type="password" name="pwd">
+        <input type="submit" value="登录" name="login">
+    </form>
+    <script type="module">
+        import { set, get, remove } from "./Cookie.js"
+        // set("age", 18, {
+        //     maxAge: 3600 * 30 * 24,
+        //     secure: true
+        // });
+        // set("username", "Tom");
+        // remove("age");
+        // console.log(get("age"));
+        const cnBtn = document.querySelector("#cn");
+        const enBtn = document.querySelector("#en");
+        cnBtn.onclick = () => {
+            set("language", "cn", { maxAge: 30 * 24 * 3600 });
+            location.reload();
+        }
+        enBtn.onclick = () => {
+            set("language", "en", { maxAge: 30 * 24 * 3600 });
+            location.reload();
+        }
+
+        //localStorage
+        const loginBtn = document.querySelector("input[name='login']");
+        const form = document.querySelector("#form");
+        form.username.value = localStorage.getItem("username");
+        loginBtn.onclick = (e) => {
+            e.preventDefault();
+            localStorage.setItem("username", form.username.value);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>
