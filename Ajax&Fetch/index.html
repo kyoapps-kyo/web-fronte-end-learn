@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./ajax5-6.js"></script>
+    <script type="module">
+        import AjaxTest from "./ajaxtest.js";
+        import { Storage } from "./storage.js";
+        AjaxTest();
+        Storage.set("users", [{ name: "John", age: 18 }, { name: "Tom", age: 16 }])
+        console.log(Storage.get("users"));
+    </script>
+</body>
+
+</html>

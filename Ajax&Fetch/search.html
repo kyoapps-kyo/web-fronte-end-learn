@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 搜索提示</title>
+</head>
+
+<body>
+    <input type="text" id="search" placeholder="Search...">
+    <ul id="result"></ul>
+
+    <script type="module">
+        import { ajax, getJSON } from "./ajax/index.js"
+        const searchInput = document.querySelector("#search");
+        const resultList = document.querySelector("#result");
+        const url = "https://www.imooc.com/api/http/search/suggest?words=";
+
+        const handleInputEvent = () => {
+            if (searchInput.value.trim() !== "") {
+                getJSON(`${url}${searchInput.value}`).then(response => {
+                    let html = "";
+                    for (const item of response.data) {
+                        html += `<li>${item.word}</li>`
+                    }
+                    resultList.style.display = "";
+                    resultList.innerHTML = html;
+                }).catch(error => console.log(error));
+            } else {
+                resultList.innerHTML = "";
+                resultList.style.display = "none";
+            }
+        }
+        let timer = null
+        searchInput.addEventListener("input", () => {
+            if (timer) {
+                clearTimeout(timer);
+            }
+            timer = setTimeout(handleInputEvent, 300)
+        }, false)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="login">
+        <input type="text" name="username" placeholder="Username">
+        <input type="password" name="password" placeholder="Password">
+        <input type="submit" value="Login" id="submit">
+    </form>
+    <script>
+        const login = document.querySelector("#login");
+        const { username, password } = login;
+        console.log(username.value, password.value);
+        const btn = document.querySelector("#submit");
+        const url = "https://www.imooc.com/api/http/json/search/suggest?words=js";
+
+        btn.addEventListener("click", (e) => {
+            //手动方式，组装要传输的数据
+            // const data = {
+            //     username: username.value, password: password.value
+            // }
+            //使用FormData
+            const data = new FormData(login);
+            e.preventDefault();
+            xhr = new XMLHttpRequest();
+            xhr.addEventListener("load", () => {
+                if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+                    console.log(xhr.response);
+                }
+            }, false);
+            xhr.open("POST", url, true);
+            //手写content-type属性
+            // xhr.setRequestHeader("Content-Type", "application/json");
+            //使用formData不需要自己设置，也不需要进行格式转换
+            // xhr.send(JSON.stringify(data));
+            xhr.send(data);
+        }, false)
+    </script>
+</body>
+
+</html>

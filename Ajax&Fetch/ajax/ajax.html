@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax的封装</title>
+</head>
+
+<body>
+    <script type="module">
+        import { ajax, get, post, getJSON } from "./index.js"
+        import {
+            ERROR_HTTP_CODE,
+            ERROR_REQUEST,
+            ERROR_TIMEOUT,
+            ERROR_ABORT,
+            ERROR_HTTP_CODE_TEXT,
+            ERROR_REQUEST_TEXT,
+            ERROR_TIMEOUT_TEXT,
+            ERROR_ABORT_TEXT,
+        } from "./constants.js";
+        const url = "https://www.imooc.com/api/http/search/suggest?words=js";
+        // const url = "https://www.iimooc.com/api/http/search/suggest?words=js";
+        // const url = "./3323.js";
+        // const xhr = ajax(url, {
+        //     method: "POST",
+        //     params: { username: "Tom" },
+        //     data: {
+        //         age: 18,
+        //     },
+        //     responseType: "json",
+        //     timeoutTime: 0,
+        //     success(response) {
+        //         console.log(response);
+        //     },
+        //     httpCodeError(err) {
+        //         console.log("http code error", err);
+        //     },
+        //     error(xhr) {
+        //         console.log("err", xhr);
+        //     },
+        //     abort(xhr) {
+        //         console.log("abort", xhr);
+        //     },
+        //     timeout(xhr) {
+        //         console.log("timeout", xhr);
+        //     },
+
+        // });
+        //通过Promise改写的ajax
+        const p = getJSON(url, {
+            params: { username: "Tom" },
+            data: { age: 18 },
+            timeoutTime: 10,
+        })
+        p.then(response => {
+            console.log(response);
+        }).catch(err => {
+            switch (err.type) {
+                case ERROR_HTTP_CODE: console.log(err.text); break;
+                case ERROR_REQUEST: console.log(err.text); break;
+                case ERROR_ABORT: console.log(err.text); break;
+                case ERROR_TIMEOUT: console.log(err.text); break;
+            }
+        })
+    </script>
+</body>
+
+</html>
