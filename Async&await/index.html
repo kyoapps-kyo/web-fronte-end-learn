@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async&Await</title>
+    <style>
+        .ad {
+            display: block;
+            width: 300px;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .none {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="ad" src="./imgs/ad.jpg" alt="" class="ad none">
+    <script>
+        //回调函数的形式
+        // function ad() {
+        //     const $ad = document.getElementById("ad");
+        //     setTimeout(function () {
+        //         $ad.classList.remove("none");
+        //         setTimeout(function () {
+        //             $ad.classList.add("none");
+        //         }, 2000)
+        //     }, 1000)
+        // }
+        // ad();
+
+        // Promise方式
+        // function wait(ms) {
+        //     return new Promise(resolve => {
+        //         setTimeout(resolve, ms);
+        //     });
+        // }
+        // function ad() {
+        //     const $ad = document.getElementById("ad");
+        //     wait(1000).then(() => {
+        //         $ad.classList.remove("none");
+        //         return wait(2000);
+        //     }).then(() => {
+        //         $ad.classList.add("none");
+        //     })
+        // };
+        // ad();
+
+        //async await 方式
+        function wait(ms) {
+            return new Promise(resolve => {
+                setTimeout(resolve, ms);
+            });
+        }
+
+        async function ad() {
+            const $ad = document.getElementById("ad");
+            await wait(1000);
+            $ad.classList.remove("none");
+            await wait(2000);
+            $ad.classList.add("none");
+        }
+        ad();
+    </script>
+</body>
+
+</html>
