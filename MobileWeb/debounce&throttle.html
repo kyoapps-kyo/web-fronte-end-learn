@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>debounce&throttle</title>
+</head>
+
+<body style="height:2000px;">
+    <div class="box" id="box" style="width:200px;height:200px;background:#f00;"></div>
+    <script>
+        const $box = document.getElementById("box")
+        const mouseData = {}
+        const windowData = {}
+        const moveEvent = $box.addEventListener("mousemove", debounce(moveHandler), false)
+        const scrollEvent = window.addEventListener("scroll", throttle(scrollHandler), false)
+        const resizeEvent = window.addEventListener("resize", debounce(resizeHandler), false)
+        function moveHandler(e) {
+            mouseData.x = e.clientX
+            mouseData.y = e.clientY
+            console.log(mouseData.x, mouseData.y);
+        }
+        function scrollHandler() {
+            console.log(document.documentElement.scrollTop);
+        }
+        function resizeHandler() {
+            console.log(window.innerWidth)
+        }
+        //防抖
+        function debounce(fn, ms = 250, context) {
+            let timer = null;
+
+            return function (...args) {
+                const self = context || this;
+                if (timer) {
+                    clearTimeout(timer)
+                }
+                timer = setTimeout(() => {
+                    fn.apply(self, args)
+                }, ms)
+            }
+        }
+        //节流 throttle
+        function throttle(fn, ms = 250, context) {
+            let lastEventTimestamp = null;
+
+            return function (...args) {
+                const self = context || this;
+                const now = Date.now();
+
+                if (!lastEventTimestamp || now - lastEventTimestamp >= ms) {
+                    lastEventTimestamp = now;
+                    fn.apply(self, args);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单指touch拖拽</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #f00
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box"></div>
+    <script>
+        const drop = $el => {
+            const startPoint = {}
+            const movePoint = {}
+            const curPoint = {
+                x: 0,
+                y: 0
+            }
+            $el.addEventListener('touchstart', touchStart, false)
+            $el.addEventListener('touchmove', touchMove, false)
+            $el.addEventListener('touchend', touchEnd, false)
+            $el.addEventListener('touchcancel', touchEnd, false)
+
+            function touchStart(event) {
+                event.preventDefault()
+                startPoint.x = event.changedTouches[0].pageX;
+                startPoint.y = event.changedTouches[0].pageY;
+                console.log(startPoint.x, startPoint.y);
+            }
+            function touchMove(event) {
+                movePoint.x = curPoint.x +
+                    event.changedTouches[0].pageX - startPoint.x
+                movePoint.y = curPoint.y +
+                    event.changedTouches[0].pageY - startPoint.y
+                $el.style.transform = `translate3d(${movePoint.x}px, ${movePoint.y}px,0)`
+            }
+            function touchEnd() {
+                curPoint.x = movePoint.x
+                curPoint.y = movePoint.y
+            }
+        }
+
+        drop(document.getElementById("box"))
+    </script>
+</body>
+
+</html>

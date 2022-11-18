@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Img lazy loading</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .box {
+            width: 100%;
+            height: 300px;
+            background-color: #1d2630;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .lazy-loading img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .none {
+            display: none;
+        }
+
+        .absolute {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate3d(-50%, -50%, 0);
+        }
+
+        .spinner-box {
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: transparent;
+        }
+
+        .leo {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .blue-orbit {
+            width: 165px;
+            height: 165px;
+            border: 1px solid #91daffa5;
+            -webkit-animation: spin3D 3s linear .2s infinite;
+        }
+
+        .green-orbit {
+            width: 120px;
+            height: 120px;
+            border: 1px solid #91ffbfa5;
+            -webkit-animation: spin3D 2s linear 0s infinite;
+        }
+
+        .red-orbit {
+            width: 90px;
+            height: 90px;
+            border: 1px solid #ffca91a5;
+            -webkit-animation: spin3D 1s linear 0s infinite;
+        }
+
+        .white-orbit {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #ffffff;
+            -webkit-animation: spin3D 10s linear 0s infinite;
+        }
+
+        .w1 {
+            transform: rotate3D(1, 1, 1, 90deg);
+        }
+
+        .w2 {
+            transform: rotate3D(1, 2, .5, 90deg);
+        }
+
+        .w3 {
+            transform: rotate3D(.5, 1, 2, 90deg);
+        }
+
+        @keyframes spin3D {
+            from {
+                transform: rotate3d(.5, .5, .5, 360deg);
+            }
+
+            to {
+                transform: rotate3d(0deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/align-self.png" alt="">
+    </div>
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/animation.png" alt="">
+    </div>
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/flex.png" alt="">
+    </div>
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/grid.png" alt="">
+    </div>
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/grid-template.png" alt="">
+    </div>
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/baseline.png" alt="">
+    </div>
+    <div class="box lazy-loading">
+        <!-- SPINNER ORBITS -->
+        <div class="spinner-box absolute">
+            <div class="blue-orbit leo">
+            </div>
+
+            <div class="green-orbit leo">
+            </div>
+
+            <div class="red-orbit leo">
+            </div>
+
+            <div class="white-orbit w1 leo">
+            </div>
+            <div class="white-orbit w2 leo">
+            </div>
+            <div class="white-orbit w3 leo">
+            </div>
+        </div>
+        <img data-src="./imgs/gesture.png" alt="">
+    </div>
+    <script>
+        const imgs = [...document.getElementsByTagName("img")]
+        let windowHeight = window.innerHeight
+        //只有在浏览器高度改变的情况下才更新windowHeight
+        window.addEventListener("resize", () => {
+            windowHeight = window.innerHeight
+        })
+        //这里只能用防抖，为什么不能用节流？
+        //节流是先执行，在执行时，还没有图片还没有到可视区，完成不了加载，才是图片不显示
+        //只有等过了延迟事件后，在此触发事件，才会有一遍执行函数，所以这里不适合使用节流
+        //自行通过修改事件稀释的方法体验他们的不同
+        window.addEventListener("scroll", debounce(lazyLoad), false)
+        lazyLoad()
+        function lazyLoad() {
+            for (let i = 0; i < imgs.length; i++) {
+                let $img = imgs[i];
+                //img一定要有高度
+                if (isInVisibleArea($img)) {
+                    $img.src = $img.dataset.src
+                    $img.parentNode.removeChild($img.previousElementSibling)
+                    imgs.splice(i--, 1)
+                }
+            }
+        }
+        function isInVisibleArea($el) {
+            //如果$el没有高度，top和bottom都会是0
+            const rect = $el.getBoundingClientRect();
+            if (rect.top < windowHeight && rect.bottom > 0)
+                return true
+            else return false
+        }
+
+        //防抖
+        function debounce(fn, ms = 250, context) {
+            let timer = null;
+
+            return function (...args) {
+                const self = context || this
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn.apply(self, args);
+                }, ms)
+            }
+        }
+
+        //节流 throttle
+        function throttle(fn, ms = 250, context) {
+            let lastEventTimestamp = null;
+
+            return function (...args) {
+                const self = context || this;
+                const now = Date.now();
+
+                if (!lastEventTimestamp || now - lastEventTimestamp >= ms) {
+                    lastEventTimestamp = now;
+                    fn.apply(self, args);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

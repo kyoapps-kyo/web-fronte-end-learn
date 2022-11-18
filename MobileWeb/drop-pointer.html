@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单指pointer拖拽</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 200px;
+            background-color: #f00
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="box"></div>
+    <script>
+        const drop = $el => {
+            const startPoint = {}
+            const movePoint = {}
+            const curPoint = {
+                x: 0,
+                y: 0
+            }
+            $el.addEventListener('pointerdown', starHandler, false)
+            $el.addEventListener('touchstart', e => { e.preventDefault(); }, false)
+
+            function starHandler(event) {
+                startPoint.x = event.pageX;
+                startPoint.y = event.pageY;
+                document.addEventListener('pointermove', moveHandler, false)
+                document.addEventListener('pointerup', endHandler, false)
+                document.addEventListener('pointercancel', endHandler, false)
+            }
+            function moveHandler(event) {
+                event.preventDefault()
+                movePoint.x = curPoint.x +
+                    event.pageX - startPoint.x
+                movePoint.y = curPoint.y +
+                    event.pageY - startPoint.y
+                $el.style.transform = `translate3d(${movePoint.x}px, ${movePoint.y}px,0)`
+            }
+            function endHandler() {
+                curPoint.x = movePoint.x
+                curPoint.y = movePoint.y
+                document.removeEventListener('pointermove', moveHandler, false)
+                document.removeEventListener('pointerup', endHandler, false)
+                document.removeEventListener('pointercancel', endHandler, false)
+            }
+        }
+
+        drop(document.getElementById("box"))
+    </script>
+</body>
+
+</html>
