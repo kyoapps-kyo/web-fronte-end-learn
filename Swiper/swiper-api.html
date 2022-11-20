@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./swiper-bundle.min.css">
+    <style>
+        .swiper {
+            width: 100%;
+            height: 300px;
+        }
+
+        .swiper-slide {
+            width: 50%;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="swiper" class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+        </div>
+        <!-- 如果需要分页器 -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 如果需要导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <!-- 如果需要滚动条 -->
+        <div class="swiper-scrollbar"></div>
+    </div>
+
+    <script src="./swiper-bundle.min.js"></script>
+    <script>
+        const slides = document.getElementsByClassName('swiper-slide');
+        const swiper = new Swiper("#swiper", {
+            // direction: 'vertical', // 垂直切换选项
+            // loop: true, // 循环模式选项
+            // initialSlide: parseInt(slides.length / 2),//初始页
+
+            speed: 300, //默认300
+
+            effect: "slide",//默认位移切换
+            // effect: 'fade', //淡入
+            // fadeEffect: {
+            //     crossFade: true //淡出
+            // },
+            grabCursor: true, //PC端鼠标变成抓手
+            // slidesPerView: 2, //容器里显示几个slide，这里需要设置slide的宽度
+            // freeMode: true, // 滑动到哪里就在哪里停止，可以用于滑动菜单
+            on: {
+                init: function (swiper) {
+                    console.log(this.activeIndex);
+                    console.log(this.width, this.height);
+                },
+                slideChangeTransitionStart: function (swiper) {
+                    // console.log("slideChangeTransitionStart");
+                    console.log(this.activeIndex);
+                    console.log(this.previousIndex);
+                },
+                slideChangeTransitionEnd: function (swiper) {
+                    // console.log("slideChangeTransitionEnd");
+                },
+                //最开始有change事件，是因为loop为true造成的，因为首位被复制了一份，一开始就会有移动事件发生
+            }, // 注册事件
+
+            autoplay: {
+                delay: 3000,
+                stopOnLastSlide: false, //到最后一个是否停止
+                disableOnInteraction: true, // 有互动的时候自动切换停止
+            },
+
+            // 如果需要分页器
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true, // 可以点击切换
+            },
+
+            // 如果需要前进后退按钮
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+
+            // 如果需要滚动条
+            scrollbar: {
+                el: '.swiper-scrollbar',
+                draggable: true, //滚动条可拖动
+                dragSize: 100, //拖动条大小
+            },
+
+            keyboard: true, //键盘操控
+            mousewheel: true, //鼠标滚轮控制
+        })      
+    </script>
+</body>
+
+</html>
