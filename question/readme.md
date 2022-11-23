@@ -51,3 +51,13 @@ scrollIntoViewOptions [可选]，目前这个参数浏览器对它的支持并�
 behavior [可选]定义过渡动画。"auto","instant"或"smooth"。默认为"auto"。
 block [可选] "start"，"center"，"end"或"nearest"。默认为"center"。
 inline [可选] "start"，"center"，"end"或"nearest"。默认为"nearest"。
+
+## 移动端点击时的蓝色遮罩
+
+取消
+
+```css
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+```
