@@ -16,3 +16,9 @@
   z-index: 1100;
   background-color: red;
 }
+
+#app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}

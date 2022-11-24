@@ -1,39 +1,53 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from "vue";
+import Header from "../components/Header.vue";
+import SearchBox from "../components/Index/SearchBox.vue";
+import Loading from "../components/Loading.vue";
+import Slider from "../components/Index/Slider.vue";
+import { useScrollState } from "../composables/scrollChange";
+const container = ref<HTMLElement | null>(null);
+//把改变状态函数封装起来，即使改变了page组件，之后提供滑动的容器，可以接着复用
+const { change } = useScrollState(container);
 </script>
 
 <template>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
-  <p>hahah</p>
+  <div ref="container" id="index-page" class="layout">
+    <Header :state="change">
+      <div class="header-layout">
+        <Loading />
+        <SearchBox></SearchBox>
+      </div>
+    </Header>
+    <div style="height: 2000px">
+      <Slider class="slider-layout"></Slider>
+    </div>
+    <div class="nav-layout"></div>
+    <div class="product-layout"></div>
+  </div>
 </template>
 <style scoped>
 .layout {
   overflow-y: auto;
   height: 100%;
+}
+.header-layout {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-layout .searchbox {
+  width: 89.333333%;
+}
+
+.slider-layout,
+.nav-layout,
+.product-layout {
+  background-color: #fff;
+}
+.nav-layout {
+  margin-bottom: 10px;
 }
 </style>

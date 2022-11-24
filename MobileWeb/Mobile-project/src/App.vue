@@ -1,10 +1,12 @@
 <script setup>
 import TabBar from "./components/TabBar.vue";
+import BackTop from "./components/BackTop.vue";
 </script>
 
 <template>
-  <router-view></router-view>
-  <TabBar />
+  <RouterView />
+  <TabBar class="tabbar-layout" />
+  <BackTop class="backtop-layout" />
 </template>
 
 <style scoped></style>

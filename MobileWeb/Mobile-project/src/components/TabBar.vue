@@ -3,6 +3,6 @@ import { ref } from "vue";
 </script>
 
 <template>
-  <route-link to="/">首页</route-link>
+  <RouterLink to="/">首页</RouterLink>
 </template>
 <style scoped></style>

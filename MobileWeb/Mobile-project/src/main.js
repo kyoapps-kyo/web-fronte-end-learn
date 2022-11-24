@@ -3,7 +3,7 @@ import "./assets/style/base.css";
 import "./assets/style/layout.css";
 import "./assets/style/reset.css";
 import App from "./App.vue";
-import router from "./router/index.js";
+import router from "./router";
 
 const app = createApp(App);
 app.use(router);
