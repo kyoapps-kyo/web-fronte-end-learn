@@ -2,8 +2,8 @@
 import { ref } from "vue";
 import Header from "../components/Header.vue";
 import SearchBox from "../components/Index/SearchBox.vue";
-import Loading from "../components/Loading.vue";
 import Slider from "../components/Index/Slider.vue";
+import Nav from "../components/Index/Nav.vue";
 import { useScrollState } from "../composables/scrollChange";
 const container = ref<HTMLElement | null>(null);
 //把改变状态函数封装起来，即使改变了page组件，之后提供滑动的容器，可以接着复用
@@ -14,14 +14,11 @@ const { change } = useScrollState(container);
   <div ref="container" id="index-page" class="layout">
     <Header :state="change">
       <div class="header-layout">
-        <Loading />
         <SearchBox></SearchBox>
       </div>
     </Header>
-    <div style="height: 2000px">
-      <Slider class="slider-layout"></Slider>
-    </div>
-    <div class="nav-layout"></div>
+    <Slider class="slider-layout" />
+    <Nav class="nav-layout" />
     <div class="product-layout"></div>
   </div>
 </template>
@@ -49,5 +46,11 @@ const { change } = useScrollState(container);
 }
 .nav-layout {
   margin-bottom: 10px;
+}
+</style>
+<style>
+.slider-layout .loader,
+.nav-layout .loader {
+  padding: 60px 0;
 }
 </style>
