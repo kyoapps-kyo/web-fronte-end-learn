@@ -1,6 +1,8 @@
-<template></template>
-
 <script setup>
 import { ref } from "vue";
 </script>
-<style lang="sass" scoped></style>
+
+<template>
+  <route-link to="/">首页</route-link>
+</template>
+<style scoped></style>

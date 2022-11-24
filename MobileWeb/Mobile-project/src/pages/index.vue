@@ -1,6 +1,39 @@
-<template></template>
-
 <script setup>
 import { ref } from "vue";
 </script>
-<style lang="sass" scoped></style>
+
+<template>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+  <p>hahah</p>
+</template>
+<style scoped>
+.layout {
+  overflow-y: auto;
+  height: 100%;
+}
+</style>

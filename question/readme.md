@@ -62,6 +62,9 @@ inline [可选] "start"，"center"，"end"或"nearest"。默认为"nearest"。
 * {
   -webkit-tap-highlight-color: transparent;
 }
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 ```
 
 ## safari 开启移动端模拟
