@@ -74,3 +74,22 @@ inline [可选] "start"，"center"，"end"或"nearest"。默认为"nearest"。
 3. 在菜单［开发］中，选择［进入响应式设计模式］或者按快捷键 Alt+Command+R，这样就可以看到页面在手机中的样子了。
 
 只能模拟 iPhone
+
+## 浏览器系统颜色的媒体查询
+
+`@media (prefers-color-scheme: light)`
+
+```css
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+```
