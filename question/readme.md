@@ -8,6 +8,8 @@ img 与包裹他的 div 下面有间隙
 
 图片只需要设置高或者宽，保持等比例缩放，不需要两个都同时设置
 
+第二种方式是将 img `display: block`
+
 ## reset CSS 相关
 
 - 移动 web 中不需要 outline
@@ -61,3 +63,5 @@ inline [可选] "start"，"center"，"end"或"nearest"。默认为"nearest"。
   -webkit-tap-highlight-color: transparent;
 }
 ```
+
+##
