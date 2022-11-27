@@ -96,3 +96,17 @@ a {
   }
 }
 ```
+
+## 多行文字省略
+
+```css
+.box {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  white-space: normal !important;
+  word-wrap: break-word;
+}
+```

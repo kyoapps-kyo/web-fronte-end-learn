@@ -4,6 +4,7 @@ import Header from "../components/Header.vue";
 import SearchBox from "../components/Index/SearchBox.vue";
 import Slider from "../components/Index/Slider.vue";
 import Nav from "../components/Index/Nav.vue";
+import Product from "../components/Index/Product.vue";
 import { useScrollState } from "../composables/scrollChange";
 const container = ref<HTMLElement | null>(null);
 //把改变状态函数封装起来，即使改变了page组件，之后提供滑动的容器，可以接着复用
@@ -19,13 +20,14 @@ const { change } = useScrollState(container);
     </Header>
     <Slider class="slider-layout" />
     <Nav class="nav-layout" />
-    <div class="product-layout"></div>
+    <Product class="product-layout" />
   </div>
 </template>
 <style scoped>
 .layout {
   overflow-y: auto;
   height: 100%;
+  padding-bottom: 48px;
 }
 .header-layout {
   width: 100%;
@@ -50,7 +52,8 @@ const { change } = useScrollState(container);
 </style>
 <style>
 .slider-layout .loader,
-.nav-layout .loader {
+.nav-layout .loader,
+.product-layout .loader {
   padding: 60px 0;
 }
 </style>
