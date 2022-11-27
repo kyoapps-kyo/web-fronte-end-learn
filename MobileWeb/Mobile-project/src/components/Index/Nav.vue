@@ -11,7 +11,6 @@ watchEffect(async () => {
   const response = await getData(URL);
   data.value = response;
   loading.value = false;
-  console.log(response);
 });
 </script>
 

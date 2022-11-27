@@ -110,3 +110,14 @@ a {
   word-wrap: break-word;
 }
 ```
+
+## route-view 组件的 ref
+
+```js
+//vue 2
+<router-view ref="order" > </router-view>
+//vue3
+<RouterView v-slot="{ Component }">
+    <component ref="container" :is="Component"></component>
+</RouterView>
+```

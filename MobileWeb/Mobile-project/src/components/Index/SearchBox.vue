@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from "vue";
-import "@/assets/icons/iconfont.css";
 const props = defineProps(["placeholder"]);
 </script>
 
