@@ -141,3 +141,47 @@ function async fn(){
   });
 }
 ```
+
+## mac 安装 nodejs
+
+### 安装
+
+<!-- 1. `brew search nodejs`
+2. `brew install node@xx` -->
+
+### 升级
+
+- `brew upgrade nodebrew`
+
+- `nodebrew ls-remote`
+
+- `nodebrew install-binary vxx.xx.x`
+
+- `nodebrew list`
+
+- `nodebrew use vxx.xx.x`
+
+- `nodebrew ls`
+
+- `node -v`
+
+### 可能的错误
+
+1. ` -bash: node: command not found`
+
+   - .zsh ` export PATH=$HOME/.nodebrew/current/bin:$PATH`
+     `source ~/.bash_profile`
+
+2. 版本没有切换
+
+   - `which node` 删除对应的文件夹
+
+### 升级 npm
+
+- `npm cache clean -f`
+
+- `npm install npm@latest -g`
+
+### 安装 ts 环境
+
+- `brew typescript`

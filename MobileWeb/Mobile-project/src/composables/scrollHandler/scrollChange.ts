@@ -58,7 +58,8 @@ const useScrollState = (
 
   const scrollTo = (top = 0, left = 0) => {
     if (!lock) return;
-    element?.scrollTo({ top, left, behavior: "smooth" });
+    const el = element as HTMLElement;
+    el.scrollTo({ top, left, behavior: "smooth" });
     lock = false;
 
     setTimeout(() => {
