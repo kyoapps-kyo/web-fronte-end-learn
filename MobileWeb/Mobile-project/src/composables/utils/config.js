@@ -1,0 +1,3 @@
+const HTML_ELEMENT_TYPE = 1;
+
+export { HTML_ELEMENT_TYPE };

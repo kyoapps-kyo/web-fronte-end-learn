@@ -121,3 +121,23 @@ a {
     <component ref="container" :is="Component"></component>
 </RouterView>
 ```
+
+## axios 取消重复请求
+
+- 执行取消后，对控制器变量赋值为空，取消请求中断
+
+- signal 为只读，无法改变，存在 signal 时，请求无法在此发送，这就是取消后无法再发送请求的原因
+
+```js
+let controller = null;
+function async fn(){
+  if (controller) {
+    controller.abort();
+    controller = null;
+  }
+  controller = new AbortController();
+  data.value = await getDelayData(`${BASE}/${props.contentId}`, {
+    signal: controller.signal,
+  });
+}
+```
