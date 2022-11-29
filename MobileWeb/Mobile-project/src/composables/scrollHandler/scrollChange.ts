@@ -7,16 +7,15 @@ const useScrollState = (
   element: MaybeComputedRef<
     HTMLElement | SVGElement | Window | Document | null | undefined
   >,
-  customOptions: Object = {}
+  { setWindowHeight = 0 }
 ) => {
   const { y } = useScroll(element, { throttle: 200, behavior: "smooth" });
   const state = ref<string>(INIT_STATE);
   const change = ref<boolean | undefined>(undefined);
-  const options = {
-    ...DEFAULT,
-    ...customOptions,
-  };
-  const windowHeight = options.setWindowHeight ? window.innerHeight : 0;
+  // const options = {
+  //   ...DEFAULT,
+  // };
+  const windowHeight = !setWindowHeight ? window.innerHeight : setWindowHeight;
   let lock = true;
 
   watch(y, (newY) => {

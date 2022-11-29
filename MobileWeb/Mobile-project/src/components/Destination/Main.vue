@@ -2,6 +2,10 @@
 import Tab from "./Tab.vue";
 import Content from "./Content.vue";
 import { ref } from "vue";
+import BackTop from "../BackTop.vue";
+const container = ref(null);
+const height = ref(300);
+
 const tabId = ref(1);
 
 function setTabId(n) {
@@ -14,8 +18,14 @@ function setTabId(n) {
     <Tab @get-tab-id="setTabId"></Tab>
   </div>
 
-  <div id="destination-content" class="content-layout">
+  <div ref="container" id="destination-content" class="content-layout">
     <Content :contentId="tabId"></Content>
+    <BackTop
+      v-if="container"
+      class="backtop-layout"
+      :el="container"
+      :elHeight="height"
+    />
   </div>
 </template>
 

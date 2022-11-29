@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useScrollState } from "../composables/scrollHandler/scrollChange";
-import BackTop from "../components/BackTop.vue";
 import Header from "../components/Destination/Header.vue";
 import Main from "../components/Destination/Main.vue";
-
-const container = ref<HTMLElement | null>(null);
-const { change } = useScrollState(container);
 </script>
 
 <template>
@@ -17,7 +12,6 @@ const { change } = useScrollState(container);
     <div class="main-layout">
       <Main></Main>
     </div>
-    <BackTop v-if="container" class="backtop-layout" :el="container" />
   </div>
 </template>
 <style scoped>

@@ -23,6 +23,7 @@ watchEffect(async () => {
     setSessionSto(id, data.value);
   }
   loading.value = false;
+  // console.log(y);
 });
 
 async function netRequest(url) {

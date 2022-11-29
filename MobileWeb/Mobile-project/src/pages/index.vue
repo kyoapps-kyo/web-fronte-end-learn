@@ -9,7 +9,7 @@ import BackTop from "../components/BackTop.vue";
 import { useScrollState } from "../composables/scrollHandler/scrollChange";
 const container = ref<HTMLElement | null>(null);
 //把改变状态函数封装起来，即使改变了page组件，之后提供滑动的容器，可以接着复用
-const { change } = useScrollState(container);
+const { change } = useScrollState(container, {});
 </script>
 
 <template>

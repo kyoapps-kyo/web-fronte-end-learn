@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref, watch, onMounted } from "vue";
+import { ref, watch } from "vue";
 import { useScrollState } from "../composables/scrollHandler/scrollChange";
 const CHANGED_CLASS_NAME = "backtop-hidden";
 
-const props = defineProps(["el"]);
+const props = defineProps(["el", "elHeight"]);
 const { change, scrollTo } = useScrollState(props.el, {
-  setWindowHeight: true,
-  scroll: true,
+  setWindowHeight: props.elHeight,
 });
 const style = ref<string>(CHANGED_CLASS_NAME);
 watch(change, (newChange) => {
