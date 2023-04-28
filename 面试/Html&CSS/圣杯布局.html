@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        header, footer {
+            background: #000;
+            color: #fff;
+            width: 100%;
+            height: 20px;
+            text-align: center;
+            line-height: 20px;
+        }
+        .container {
+            padding: 0 150px 0 200px;
+        }
+        .container .center, .left, .right{
+            color: rgb(0, 170, 14);
+            float: left;
+            text-align: center;
+        } 
+        .container .center{
+            background-color: #3419e5;
+            width: 100%;
+        }
+        .container .left, .right{
+            background-color: #ccc; 
+        }
+        .container .left{
+            width: 200px;
+            margin-left: -100%; /* 这里的100%指的是父元素的值，即container的宽度，因为这里是被挤下来的，想要到最前面的话，需要移动整个容器的宽度，所以这里需要移动-100%，此时left与center发生重叠，之后通过相对定位将left移动到预留位置 */
+            position: relative;
+            left: -200px;
+        }
+        .container .right{
+            width: 150px;
+            margin-right: -150px;
+            /* mr负值，产生的效果是将相邻右侧的元素向做移动，反过来看，可以当成是右侧元素侵占了当前元素本身的位置，元素自身相对来说面积缩小，所以当负值等于元素自身 */
+        }
+        .bfc{
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <header>header</header>
+    <div class="container bfc">
+        <div class="center">center</div>
+        <div class="left">left</div>
+        <div class="right">right</div>
+    </div>
+    <footer>footer</footer>
+</body>
+</html>

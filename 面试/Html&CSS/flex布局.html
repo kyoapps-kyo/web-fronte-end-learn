@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>圣杯布局</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #f7f7f7;
+			font-family: Arial, sans-serif;
+			font-size: 16px;
+			line-height: 1.5;
+		}
+ 		.wrapper {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-items: stretch;
+			background-color: #fff;
+			padding: 0 200px;
+			box-sizing: border-box;
+		}
+ 		.main-content {
+			flex-grow: 1;
+			background-color: #eee;
+			padding: 30px;
+			box-sizing: border-box;
+		}
+ 		.sidebar {
+			flex-basis: 200px;
+			background-color: #ccc;
+			padding: 30px;
+			box-sizing: border-box;
+		}
+ 		#left-sidebar {
+			order: -1;
+		}
+ 		#right-sidebar {
+			order: 1;
+		}
+ 		.header {
+			background-color: #333;
+			color: #fff;
+			padding: 20px;
+			box-sizing: border-box;
+		}
+ 		.footer {
+			background-color: #333;
+			color: #fff;
+			padding: 20px;
+			box-sizing: border-box;
+			margin-top: 30px;
+		}
+	</style>
+</head>
+<body>
+	<header class="header">
+		<h1>Header</h1>
+	</header>
+ 	<div class="wrapper">
+		<div class="sidebar" id="left-sidebar">
+			<h2>Left Sidebar</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac nisi pellentesque, pulvinar lorem eu, hendrerit nibh. Donec hendrerit tortor quis magna dignissim ultricies. Nam posuere mauris non velit tincidunt consectetur. </p>
+		</div>
+ 		<main class="main-content">
+			<h2>Main Content</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac nisi pellentesque, pulvinar lorem eu, hendrerit nibh. Donec hendrerit tortor quis magna dignissim ultricies. Nam posuere mauris non velit tincidunt consectetur. </p>
+		</main>
+ 		<div class="sidebar" id="right-sidebar">
+			<h2>Right Sidebar</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac nisi pellentesque, pulvinar lorem eu, hendrerit nibh. Donec hendrerit tortor quis magna dignissim ultricies. Nam posuere mauris non velit tincidunt consectetur. </p>
+		</div>
+	</div>
+ 	<footer class="footer">
+		<h3>Footer</h3>
+	</footer>
+</body>
+</html>
