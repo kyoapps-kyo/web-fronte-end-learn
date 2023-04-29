@@ -185,3 +185,24 @@ function async fn(){
 ### 安装 ts 环境
 
 - `brew typescript`
+
+## 更改 NPM 和 YARN 源
+
+```js
+//查询当前镜像
+npm get registry
+yarn config get registry
+//设置镜像
+npm config set registry https://registry.npmmirror.com
+yarn config set registry https://registry.npmmirror.com
+//设置为官方镜像
+npm config set registry https://registry.npmjs.org/
+yarn config set registry https://registry.yarnpkg.com
+```
+
+## yarn 或者 npm 出现 error
+
+1. Error: unable to get local issuer certificate
+   - 解决办法：
+   - `yarn config set "strict-ssl" false -g`
+   - `npm config set "strict-ssl" false -g`
